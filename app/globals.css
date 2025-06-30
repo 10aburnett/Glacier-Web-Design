@@ -10,13 +10,24 @@ html, body {
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
   }
 
   body {
     @apply text-ice-800 font-inter;
     min-height: 100vh;
     background: #070024;
+  }
+
+  /* Performance optimizations for smooth scrolling */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize rendering for better performance */
+  .section-padding {
+    contain: layout style; /* CSS containment for better performance */
   }
 }
 
@@ -247,6 +258,7 @@ html, body {
     }
   }
 
+  /* Optimized color-shift animation - reduced frequency for better performance */
   @keyframes color-shift {
     0% {
       filter: hue-rotate(0deg);
@@ -271,10 +283,11 @@ html, body {
   }
 
   .animate-color-shift {
-    animation: color-shift 4s ease-in-out infinite;
+    animation: color-shift 8s ease-in-out infinite; /* Doubled duration for smoother performance */
+    will-change: filter; /* Optimize for filter changes */
   }
 
-  /* Neon glow pulsing animation */
+  /* Optimized neon glow pulsing animation */
   @keyframes pulse-glow {
     0%, 100% {
       text-shadow: 
@@ -292,22 +305,34 @@ html, body {
   }
 
   .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+    animation: pulse-glow 3s ease-in-out infinite; /* Increased duration for smoothness */
+    will-change: text-shadow; /* Optimize for text-shadow changes */
   }
 
-  /* Sequential float animation with longer rest and slower bob */
+  /* Optimized gentle float with hardware acceleration and reduced movement */
   @keyframes gentle-float-cycle {
-    0%, 10%, 100% {
-      transform: translateY(0px);
+    0%, 15%, 100% {
+      transform: translate3d(0, 0px, 0); /* Use transform3d for hardware acceleration */
     }
-    5% {
-      transform: translateY(-7px);
+    7.5% {
+      transform: translate3d(0, -4px, 0); /* Reduced movement for less visual noise */
     }
   }
 
   .animate-gentle-float {
-    animation: gentle-float-cycle 4s ease-in-out infinite;
+    animation: gentle-float-cycle 6s ease-in-out infinite; /* Longer duration for smoother feel */
     opacity: 1 !important;
+    will-change: transform; /* Optimize for transform changes */
+    transform: translateZ(0); /* Force hardware acceleration */
+  }
+
+  /* Pause animations when user prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gentle-float,
+    .animate-color-shift,
+    .animate-pulse-glow {
+      animation: none;
+    }
   }
 
   /* Glisten animation for text */
