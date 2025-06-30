@@ -14,6 +14,15 @@ export const metadata: Metadata = {
     description: 'Transform your outdated website into a modern, high-performance digital experience.',
     type: 'website',
   },
+  icons: {
+    icon: [
+      { url: '/mountain.svg', type: 'image/svg+xml' },
+      { url: '/mountain.svg', sizes: '32x32', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/mountain.svg', sizes: '180x180', type: 'image/svg+xml' },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -23,6 +32,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        <link rel="icon" href="/mountain.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/mountain.svg" />
+      </head>
       <body className="antialiased">
         <LenisProvider>
           {children}
