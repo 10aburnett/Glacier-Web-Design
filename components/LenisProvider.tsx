@@ -1,12 +1,29 @@
 'use client'
 
-import { useEffect } from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import Lenis from 'lenis'
 
-export default function SmoothScrolling() {
+interface LenisContextType {
+  lenis: Lenis | null
+}
+
+const LenisContext = createContext<LenisContextType>({ lenis: null })
+
+export const useLenis = () => {
+  const context = useContext(LenisContext)
+  return context.lenis
+}
+
+interface LenisProviderProps {
+  children: ReactNode
+}
+
+export default function LenisProvider({ children }: LenisProviderProps) {
+  const [lenis, setLenis] = useState<Lenis | null>(null)
+
   useEffect(() => {
     // Create a Lenis instance with ultra-smooth settings
-    const lenis = new Lenis({
+    const lenisInstance = new Lenis({
       duration: 1.8,            // Increased for more smoothness
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing curve
       direction: 'vertical',    // Vertical scrolling only
@@ -20,22 +37,29 @@ export default function SmoothScrolling() {
       touchInertiaMultiplier: 35, // Smooth touch inertia
     })
 
+    setLenis(lenisInstance)
+
     // Animation loop using requestAnimationFrame with better performance
     let animationId: number
     function raf(time: number) {
-      lenis.raf(time)
+      lenisInstance.raf(time)
       animationId = requestAnimationFrame(raf)
     }
     animationId = requestAnimationFrame(raf)
 
     // Cleanup function
     return () => {
-      lenis.destroy()
+      lenisInstance.destroy()
       if (animationId) {
         cancelAnimationFrame(animationId)
       }
+      setLenis(null)
     }
   }, [])
 
-  return null // This component doesn't render anything visual
+  return (
+    <LenisContext.Provider value={{ lenis }}>
+      {children}
+    </LenisContext.Provider>
+  )
 } 

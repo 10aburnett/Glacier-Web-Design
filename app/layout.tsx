@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import SmoothScrolling from '@/components/SmoothScrolling'
+import LenisProvider from '@/components/LenisProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,8 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body className="antialiased">
-        <SmoothScrolling />
-        {children}
+        <LenisProvider>
+          {children}
+        </LenisProvider>
       </body>
     </html>
   )

@@ -20,14 +20,7 @@ export default function Home() {
     <>
       {/* Fixed Parallax Iceberg Background - Extended to cover full page */}
       <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
-        <div 
-          className="iceberg-background w-full h-[600vh] bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/assets/IcebergBG5.svg)',
-            backgroundSize: '160% 600vh', // Width at 160%, height spans full page length
-            backgroundPosition: 'center -150px'
-          }}
-        />
+        <div className="iceberg-background w-full h-[600vh] bg-no-repeat state-top" />
       </div>
 
       {/* Parallax Effect Handler */}

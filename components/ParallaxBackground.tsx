@@ -1,46 +1,39 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useLenis } from './LenisProvider'
 
 export default function ParallaxBackground() {
+  const lenis = useLenis()
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset
-      const rate = scrolled * -0.5 // Parallax speed
+    if (!lenis) return
+
+    const onScroll = (lenisData: any) => {
+      // Access scroll position from the event callback
+      const y = lenisData.scroll || 0
       const maxScroll = document.body.scrollHeight - window.innerHeight
-      const scrollPercent = scrolled / maxScroll
-      
+      const scrollPercent = y / Math.max(maxScroll, 1) // Prevent division by zero
+
+      // Apply GPU-only parallax transform
       const parallaxElement = document.querySelector('.iceberg-background') as HTMLElement
-      
       if (parallaxElement) {
-        // Apply parallax transform
-        parallaxElement.style.transform = `translateY(${rate}px)`
+        parallaxElement.style.transform = `translate3d(0, ${y * -0.5}px, 0)`
         
-        // Progressive reveal effects based on scroll position
-        if (scrollPercent < 0.1) {
-          // Top section - Aurora/Sky area
-          parallaxElement.style.filter = 'brightness(1.1) contrast(0.95) saturate(1.1)'
-          parallaxElement.style.backgroundPosition = 'center -150px'
-        } else if (scrollPercent < 0.3) {
-          // Upper iceberg area
-          parallaxElement.style.filter = 'brightness(1.05) contrast(1) saturate(1.05)'
-          parallaxElement.style.backgroundPosition = 'center calc(20% - 150px)'
-        } else if (scrollPercent < 0.6) {
-          // Waterline area
-          parallaxElement.style.filter = 'brightness(1) contrast(1.05) saturate(1)'
-          parallaxElement.style.backgroundPosition = 'center calc(40% - 150px)'
-        } else if (scrollPercent < 0.8) {
-          // Upper underwater area
-          parallaxElement.style.filter = 'brightness(0.95) contrast(1.1) saturate(0.95) hue-rotate(5deg)'
-          parallaxElement.style.backgroundPosition = 'center calc(60% - 150px)'
-        } else {
-          // Deep underwater area
-          parallaxElement.style.filter = 'brightness(0.85) contrast(1.15) saturate(0.9) hue-rotate(10deg)'
-          parallaxElement.style.backgroundPosition = 'center calc(80% - 150px)'
-        }
+        // Determine state based on scroll percentage
+        let state = 'state-top'
+        if (scrollPercent < 0.1) state = 'state-top'
+        else if (scrollPercent < 0.3) state = 'state-upper'
+        else if (scrollPercent < 0.6) state = 'state-waterline'
+        else if (scrollPercent < 0.8) state = 'state-upper-deep'
+        else state = 'state-deep'
+        
+        // Preserve original classes and add state class
+        const baseClasses = 'iceberg-background w-full h-[600vh] bg-no-repeat'
+        parallaxElement.className = `${baseClasses} ${state}`
       }
 
-      // Add subtle water particles effect in deep areas
+      // Handle water particles effect for deep areas
       if (scrollPercent > 0.7) {
         addWaterParticles()
       } else {
@@ -72,33 +65,18 @@ export default function ParallaxBackground() {
       }
     }
 
-    // Optimized scroll listener with requestAnimationFrame
-    let ticking = false
-    const requestTick = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    // Ensure page loads at top
-    window.scrollTo(0, 0)
+    // Subscribe to Lenis scroll events
+    lenis.on('scroll', onScroll)
     
-    // Use passive listener for better performance
-    window.addEventListener('scroll', requestTick, { passive: true })
-    
-    // Initial call
-    handleScroll()
+    // Initial call with fallback data
+    onScroll({ scroll: lenis.scroll || 0 })
 
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', requestTick)
+      lenis.off('scroll', onScroll)
       removeWaterParticles()
     }
-  }, [])
+  }, [lenis])
 
   return null // This component doesn't render anything, just handles scroll effects
 } 

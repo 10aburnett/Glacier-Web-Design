@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X, Mountain } from 'lucide-react'
 import Link from 'next/link'
+import { useLenis } from './LenisProvider'
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -17,9 +18,14 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const lenis = useLenis()
+  
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
+    if (!lenis) return
+
+    const handleScroll = (lenisData: any) => {
+      // Access scroll position from the event callback
+      const currentScrollY = lenisData.scroll || 0
       
       // Always show navbar at the top of the page
       if (currentScrollY < 50) {
@@ -30,15 +36,15 @@ export default function Navbar() {
           setIsVisible(true)
         } else {
           setIsVisible(false)
-    }
+        }
       }
       
       setLastScrollY(currentScrollY)
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+    lenis.on('scroll', handleScroll)
+    return () => lenis.off('scroll', handleScroll)
+  }, [lenis, lastScrollY])
 
   return (
     <motion.nav
