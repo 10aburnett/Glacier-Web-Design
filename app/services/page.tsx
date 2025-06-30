@@ -156,8 +156,6 @@ export default function ServicesPage() {
           // Calculate final scroll position
           const targetScrollPosition = elementTop - navbarHeight - buffer
           
-          console.log('Scrolling to:', hash, 'Position:', targetScrollPosition)
-          
           // Use Lenis scrollTo method for smooth scrolling
           lenis.scrollTo(targetScrollPosition, {
             duration: 1.5,
@@ -299,7 +297,14 @@ export default function ServicesPage() {
                   viewport={{ once: true }}
                   className="glass-dark rounded-xl p-6 text-center group backdrop-blur-xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all"
                 >
-                  <Icon className="w-12 h-12 text-fintech-accent mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                  <Icon 
+                    className="w-12 h-12 text-fintech-accent mx-auto mb-4 group-hover:scale-110 transition-transform" 
+                    key={`additional-service-${index}`}
+                    style={{ 
+                      transform: 'scale(1)',
+                      willChange: 'transform'
+                    }}
+                  />
                   <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
                   <p className="text-sm text-glacier-200">{service.description}</p>
                 </motion.div>

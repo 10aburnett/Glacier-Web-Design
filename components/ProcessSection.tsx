@@ -121,9 +121,12 @@ export default function ProcessSection() {
 
                   {/* Icon */}
                   <motion.div
+                    initial={{ scale: 1, rotate: 0 }}
+                    animate={{ scale: 1, rotate: 0 }}
                     whileHover={{ scale: 1.2, rotate: 360 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="relative z-10"
+                    key={`process-icon-${step.id}`}
                   >
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-glacier-400 to-glacier-600 p-0.5">
                       <div className="w-full h-full rounded-full bg-ice-900/90 flex items-center justify-center">

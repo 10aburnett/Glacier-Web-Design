@@ -51,7 +51,14 @@ export default function ServicePill({ title, icon: Icon, serviceId, animationDel
       <div className="flex items-center gap-1.5">
         {/* Icon */}
         <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 transition-colors duration-300">
-          <Icon className="w-4 h-4 text-cyan-400 animate-color-shift" />
+          <Icon 
+            className="w-4 h-4 text-cyan-400 animate-color-shift" 
+            key={`service-icon-${serviceId}`}
+            style={{ 
+              animationPlayState: 'running',
+              willChange: 'filter'
+            }}
+          />
         </div>
         
         {/* Title */}
