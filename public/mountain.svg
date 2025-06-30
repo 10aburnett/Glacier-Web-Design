@@ -3,28 +3,36 @@
   <!-- Generator: Adobe Illustrator 29.6.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 207)  -->
   <defs>
     <style>
-      .st0 {
+      .st0, .st1 {
         fill: none;
       }
 
-      .st1 {
+      .st2 {
         fill: #122e5c;
         stroke: #122e5c;
         stroke-miterlimit: 10;
       }
 
-      .st1, .st2 {
+      .st2, .st1, .st3 {
         stroke-linecap: round;
       }
 
-      .st2 {
-        fill: #fff;
-        stroke: #38bdf9;
+      .st1 {
+        stroke: #fff;
+        stroke-width: .53px;
+      }
+
+      .st1, .st3 {
         stroke-linejoin: round;
-        stroke-width: 2px;
       }
 
       .st3 {
+        fill: #fff;
+        stroke: #38bdf9;
+        stroke-width: 2px;
+      }
+
+      .st4 {
         clip-path: url(#clippath);
       }
     </style>
@@ -32,10 +40,14 @@
       <circle class="st0" cx="12" cy="12" r="12"/>
     </clipPath>
   </defs>
-  <g class="st3">
+  <g class="st4">
     <g>
-      <circle class="st1" cx="12" cy="12" r="12"/>
-      <path class="st2" d="M10.52,5.96l4.58,9.16,5.72-5.72,5.72,17.17H3.65L10.52,5.96Z"/>
+      <circle class="st2" cx="12" cy="12" r="12"/>
+      <path class="st3" d="M10.52,5.96l4.58,9.16,5.72-5.72,5.72,17.17H3.65L10.52,5.96Z"/>
     </g>
   </g>
+  <line class="st1" x1="10.61" y1="5.95" x2="15.1" y2="15.12"/>
+  <line class="st1" x1="5.22" y1="21.94" x2="10.52" y2="5.96"/>
+  <line class="st1" x1="23.3" y1="16.79" x2="20.86" y2="9.4"/>
+  <line class="st1" x1="15.1" y1="15.12" x2="20.82" y2="9.4"/>
 </svg>
