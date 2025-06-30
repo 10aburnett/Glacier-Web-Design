@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { useLenis } from '@/components/LenisProvider'
 import { 
   Layout, 
   Smartphone, 
@@ -130,28 +131,47 @@ const additionalServices = [
 
 export default function ServicesPage() {
   const [highlightedService, setHighlightedService] = useState<string | null>(null)
+  const lenis = useLenis()
 
   useEffect(() => {
     // Check if there's a hash in the URL
     const hash = window.location.hash.substring(1)
-    if (hash) {
-      // Find the service element and scroll to it
+    if (hash && lenis) {
+      // Find the service element and scroll to it using Lenis
       const serviceElement = document.getElementById(hash)
       if (serviceElement) {
-        // Delay to ensure the page has rendered
+        // Delay to ensure the page has rendered and Lenis is ready
         setTimeout(() => {
-          serviceElement.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'center'
+          // Get the element's bounding rectangle for accurate positioning
+          const elementRect = serviceElement.getBoundingClientRect()
+          const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop
+          
+          // Calculate the actual position of the element in the document
+          const elementTop = elementRect.top + currentScrollTop
+          
+          // Account for navbar height and add buffer for clean spacing
+          const navbarHeight = 100 // Fixed navbar height
+          const buffer = 40 // Buffer for visual spacing
+          
+          // Calculate final scroll position
+          const targetScrollPosition = elementTop - navbarHeight - buffer
+          
+          console.log('Scrolling to:', hash, 'Position:', targetScrollPosition)
+          
+          // Use Lenis scrollTo method for smooth scrolling
+          lenis.scrollTo(targetScrollPosition, {
+            duration: 1.5,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
           })
+          
           // Highlight the service
           setHighlightedService(hash)
           // Remove highlight after 3 seconds
           setTimeout(() => setHighlightedService(null), 3000)
-        }, 100)
+        }, 300)
       }
     }
-  }, [])
+  }, [lenis])
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-ice-950 via-glacier-950 to-ice-950">
