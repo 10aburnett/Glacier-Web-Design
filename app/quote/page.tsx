@@ -99,19 +99,25 @@ export default function QuotePage() {
     }
   }
 
-  // Scroll to top whenever currentStep changes (but not on first render)
+  // INSTANT teleport to top whenever currentStep changes (but not on first render)
   useEffect(() => {
     if (isFirstRender) {
       setIsFirstRender(false)
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Multiple fallback methods for instant positioning - bulletproof across all devices
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     }
   }, [currentStep, isFirstRender])
 
-  // Scroll to top when form is submitted successfully
+  // INSTANT teleport to top when form is submitted successfully
   useEffect(() => {
     if (isSubmitted) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Multiple fallback methods for instant positioning
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     }
   }, [isSubmitted])
 
