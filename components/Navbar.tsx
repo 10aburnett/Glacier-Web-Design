@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X, Mountain } from 'lucide-react'
 import Link from 'next/link'
-import { useLenis } from './LenisProvider'
+import { useLenis, useScrollToTop } from './LenisProvider'
 
 const navItems = [
   { name: 'Home', href: '/' },
@@ -19,6 +19,7 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const lenis = useLenis()
+  const { navigateAndScrollToTop } = useScrollToTop()
   
   useEffect(() => {
     if (!lenis) return
@@ -57,25 +58,31 @@ export default function Navbar() {
         <div className="glass-dark rounded-2xl px-6 py-3 transition-all duration-300 border border-white/10 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             {/* Logo - Text and Icon Only */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <button 
+              onClick={() => navigateAndScrollToTop('/')} 
+              className="flex items-center gap-3 group"
+            >
               <Mountain className="w-8 h-8 text-white group-hover:text-white/80 transition-colors duration-300" />
               <span className="text-2xl font-bold text-white group-hover:text-white/80 transition-colors duration-300">GLACIER</span>
-            </Link>
+            </button>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => navigateAndScrollToTop(item.href)}
                   className="text-white hover:text-white/80 transition-colors font-medium text-sm uppercase tracking-wide"
                 >
                   {item.name}
-                </Link>
+                </button>
               ))}
-              <Link href="/quote" className="btn-primary text-sm">
+              <button 
+                onClick={() => navigateAndScrollToTop('/quote')} 
+                className="btn-primary text-sm"
+              >
                 Get Quote
-              </Link>
+              </button>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -103,18 +110,26 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-4 py-6 mt-4 border-t border-white/20">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white hover:text-white/80 transition-colors font-medium px-2"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    navigateAndScrollToTop(item.href)
+                  }}
+                  className="text-white hover:text-white/80 transition-colors font-medium px-2 text-left"
                 >
                   {item.name}
-                </Link>
+                </button>
               ))}
-              <Link href="/quote" className="btn-primary w-full mt-2 text-center block">
+              <button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  navigateAndScrollToTop('/quote')
+                }}
+                className="btn-primary w-full mt-2 text-center block"
+              >
                 Get Quote
-              </Link>
+              </button>
             </nav>
           </motion.div>
         </div>

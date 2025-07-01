@@ -70,24 +70,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    {/* Use button for navigation links that need scroll to top */}
-                    {['Home', 'About', 'Why Glacier?'].includes(link.name) ? (
-                      <button 
-                        onClick={() => navigateAndScrollToTop(link.href)}
-                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
-                      >
-                        <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                        {link.name}
-                      </button>
-                    ) : (
-                      <Link 
-                        href={link.href}
-                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
-                      >
-                        <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                        {link.name}
-                      </Link>
-                    )}
+                    <button 
+                      onClick={() => navigateAndScrollToTop(link.href)}
+                      className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
+                    >
+                      <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {link.name}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -99,13 +88,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.legal.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href}
+                    <button 
+                      onClick={() => navigateAndScrollToTop(link.href)}
                       className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
                     >
                       <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
