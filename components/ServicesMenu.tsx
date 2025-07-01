@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useLenis } from './LenisProvider'
 import ServicePill from './ServicePill'
 import { 
   Layout, 
@@ -46,8 +47,14 @@ const services = [
 
 export default function ServicesMenu() {
   const router = useRouter()
+  const lenis = useLenis()
 
   const handlePillClick = (serviceId: string) => {
+    // Store current scroll position before navigating
+    const currentScrollY = lenis ? lenis.scroll : window.scrollY
+    sessionStorage.setItem('pillButtonScrollPosition', currentScrollY.toString())
+    sessionStorage.setItem('cameFromPillButton', 'true')
+    
     router.push(`/services#${serviceId}`)
   }
 

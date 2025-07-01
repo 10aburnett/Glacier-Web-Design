@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useLenis } from '@/components/LenisProvider'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
@@ -11,10 +12,34 @@ import Footer from '@/components/Footer'
 import ParallaxBackground from '@/components/ParallaxBackground'
 
 export default function Home() {
-  // Ensure page always loads at top
+  const lenis = useLenis()
+  
+  // Handle scroll position restoration for pill button navigation
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    const cameFromPillButton = sessionStorage.getItem('cameFromPillButton')
+    const savedScrollPosition = sessionStorage.getItem('pillButtonScrollPosition')
+    
+    if (cameFromPillButton === 'true' && savedScrollPosition) {
+      // User came back from pill button navigation, restore scroll position
+      const scrollY = parseInt(savedScrollPosition, 10)
+      
+      // Small delay to ensure page is fully loaded
+      setTimeout(() => {
+        if (lenis) {
+          lenis.scrollTo(scrollY, { duration: 0.8 })
+        } else {
+          window.scrollTo({ top: scrollY, behavior: 'smooth' })
+        }
+      }, 100)
+      
+      // Clear the flags
+      sessionStorage.removeItem('cameFromPillButton')
+      sessionStorage.removeItem('pillButtonScrollPosition')
+    } else {
+      // Normal page load, go to top
+      window.scrollTo(0, 0)
+    }
+  }, [lenis])
   
   return (
     <>
