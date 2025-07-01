@@ -63,7 +63,7 @@ export default function QuotePage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [fileUploadError, setFileUploadError] = useState<string | null>(null)
-  const [isFirstRender, setIsFirstRender] = useState(true)
+
   const [formData, setFormData] = useState({
     projectType: '',
     features: [] as string[],
@@ -89,37 +89,27 @@ export default function QuotePage() {
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
+      // INSTANT scroll BEFORE state change - bulletproof across all devices
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      
       setCurrentStep(currentStep + 1)
     }
   }
 
   const prevStep = () => {
     if (currentStep > 1) {
+      // INSTANT scroll BEFORE state change - bulletproof across all devices
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      
       setCurrentStep(currentStep - 1)
     }
   }
 
-  // INSTANT teleport to top whenever currentStep changes (but not on first render)
-  useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false)
-    } else {
-      // Multiple fallback methods for instant positioning - bulletproof across all devices
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-    }
-  }, [currentStep, isFirstRender])
 
-  // INSTANT teleport to top when form is submitted successfully
-  useEffect(() => {
-    if (isSubmitted) {
-      // Multiple fallback methods for instant positioning
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-    }
-  }, [isSubmitted])
 
   const handleFeatureToggle = (featureId: string) => {
     setFormData(prev => ({
@@ -270,6 +260,11 @@ export default function QuotePage() {
   }
 
   const handleSubmit = async () => {
+    // INSTANT scroll BEFORE submission - bulletproof across all devices
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    
     try {
       console.log('Submitting quote with data:', formData)
       
