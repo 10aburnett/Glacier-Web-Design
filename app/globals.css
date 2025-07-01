@@ -163,6 +163,13 @@ html, body {
     }
   }
 
+  /* Surface Duo Homepage Hero Title Fix */
+  @media (width: 720px) and (height: 540px) and (orientation: landscape) {
+    section[class*="min-h-screen"] h1 {
+      margin-top: -6.25rem !important;
+    }
+  }
+
   /* Nest Hub Landscape - Homepage Hero Only */
   @media (min-width: 1020px) and (max-width: 1030px) and (min-height: 595px) and (max-height: 605px) and (orientation: landscape) {
     section[class*="min-h-screen"] .section-padding.relative.z-10 {
