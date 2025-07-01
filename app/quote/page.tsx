@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
@@ -63,6 +63,7 @@ export default function QuotePage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [fileUploadError, setFileUploadError] = useState<string | null>(null)
+  const [isFirstRender, setIsFirstRender] = useState(true)
   const [formData, setFormData] = useState({
     projectType: '',
     features: [] as string[],
@@ -89,16 +90,30 @@ export default function QuotePage() {
   const nextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
+
+  // Scroll to top whenever currentStep changes (but not on first render)
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [currentStep, isFirstRender])
+
+  // Scroll to top when form is submitted successfully
+  useEffect(() => {
+    if (isSubmitted) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [isSubmitted])
 
   const handleFeatureToggle = (featureId: string) => {
     setFormData(prev => ({
@@ -249,7 +264,6 @@ export default function QuotePage() {
   }
 
   const handleSubmit = async () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
     try {
       console.log('Submitting quote with data:', formData)
       
