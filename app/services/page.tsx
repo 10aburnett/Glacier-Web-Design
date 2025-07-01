@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { useLenis } from '@/components/LenisProvider'
+import { useLenis, useScrollToTop } from '@/components/LenisProvider'
 import { 
   Layout, 
   Smartphone, 
@@ -132,6 +132,7 @@ const additionalServices = [
 export default function ServicesPage() {
   const [highlightedService, setHighlightedService] = useState<string | null>(null)
   const lenis = useLenis()
+  const { navigateAndScrollToTop } = useScrollToTop()
 
   useEffect(() => {
     // Check if there's a hash in the URL
@@ -331,29 +332,23 @@ export default function ServicesPage() {
               Let's discuss your project and create something extraordinary together
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div
+              <motion.button
+                onClick={() => navigateAndScrollToTop('/quote')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="btn-primary inline-flex items-center justify-center"
               >
-                <Link 
-                  href="/quote"
-                  className="btn-primary inline-flex items-center justify-center"
-                >
-                  Get Started
-                  <span className="inline-block ml-2">→</span>
-                </Link>
-              </motion.div>
-              <motion.div
+                Get Started
+                <span className="inline-block ml-2">→</span>
+              </motion.button>
+              <motion.button
+                onClick={() => navigateAndScrollToTop('/contact')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-full border border-white/30 transition-all duration-300 hover:bg-white/20 hover:border-white/50 inline-flex items-center justify-center"
               >
-                <Link 
-                  href="/contact"
-                  className="px-8 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-full border border-white/30 transition-all duration-300 hover:bg-white/20 hover:border-white/50 inline-flex items-center justify-center"
-                >
-                  Contact Us
-                </Link>
-              </motion.div>
+                Contact Us
+              </motion.button>
             </div>
           </motion.div>
         </div>
