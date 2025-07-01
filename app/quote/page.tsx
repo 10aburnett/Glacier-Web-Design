@@ -750,8 +750,20 @@ export default function QuotePage() {
         />
       </div>
 
-      {/* Desktop/Tablet Background - original positioning */}
-      <div className="hidden sm:block fixed inset-0 w-full h-full overflow-hidden z-0">
+      {/* Tablet Portrait Background - optimized for iPad Mini portrait */}
+      <div className="hidden sm:block lg:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
+        <div 
+          className="iceberg-background w-full h-[600vh] bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/assets/IcebergBG5.svg?v=3)',
+            backgroundSize: '180% 600vh',
+            backgroundPosition: 'center -800px',
+          }}
+        />
+      </div>
+
+      {/* Desktop Background - original positioning */}
+      <div className="hidden lg:block fixed inset-0 w-full h-full overflow-hidden z-0">
         <div 
           className="iceberg-background w-full h-[600vh] bg-center bg-no-repeat"
           style={{
