@@ -738,26 +738,49 @@ export default function QuotePage() {
           {/* Progress Bar - only show if not submitted */}
           {!isSubmitted && (
             <div className="max-w-4xl mx-auto mb-8">
-              <div className="flex items-center justify-between mb-4">
-                {Array.from({ length: totalSteps }, (_, i) => (
-                  <div key={i} className="flex items-center">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
-                      i + 1 <= currentStep ? 'bg-glacier-500 text-white' : 'bg-white/20 text-white/60'
-                    }`}>
-                      {i + 1 <= currentStep ? <Check className="w-4 h-4" /> : i + 1}
+              {/* Mobile Progress: 2 rows of 3 */}
+              <div className="md:hidden">
+                <div className="grid grid-cols-3 gap-4 mb-4">
+                  {Array.from({ length: totalSteps }, (_, i) => (
+                    <div key={i} className="flex justify-center">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                        i + 1 <= currentStep ? 'bg-glacier-500 text-white' : 'bg-white/20 text-white/60'
+                      }`}>
+                        {i + 1 <= currentStep ? <Check className="w-4 h-4" /> : i + 1}
+                      </div>
                     </div>
-                    {i < totalSteps - 1 && (
-                      <div className={`h-0.5 w-16 mx-2 ${
-                        i + 1 < currentStep ? 'bg-glacier-500' : 'bg-white/20'
-                      }`} />
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="text-center">
+                  <span className="text-white/60 text-sm">
+                    Step {currentStep} of {totalSteps}
+                  </span>
+                </div>
               </div>
-              <div className="text-center">
-                <span className="text-white/60 text-sm">
-                  Step {currentStep} of {totalSteps}
-                </span>
+
+              {/* Desktop Progress: Single row with connecting lines */}
+              <div className="hidden md:block">
+                <div className="flex items-center justify-between mb-4">
+                  {Array.from({ length: totalSteps }, (_, i) => (
+                    <div key={i} className="flex items-center">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                        i + 1 <= currentStep ? 'bg-glacier-500 text-white' : 'bg-white/20 text-white/60'
+                      }`}>
+                        {i + 1 <= currentStep ? <Check className="w-4 h-4" /> : i + 1}
+                      </div>
+                      {i < totalSteps - 1 && (
+                        <div className={`h-0.5 w-16 mx-2 ${
+                          i + 1 < currentStep ? 'bg-glacier-500' : 'bg-white/20'
+                        }`} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="text-center">
+                  <span className="text-white/60 text-sm">
+                    Step {currentStep} of {totalSteps}
+                  </span>
+                </div>
               </div>
             </div>
           )}
