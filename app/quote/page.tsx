@@ -750,8 +750,8 @@ export default function QuotePage() {
         />
       </div>
 
-      {/* Tablet Portrait Background - optimized for iPad Mini portrait */}
-      <div className="hidden sm:block lg:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
+      {/* Tablet Portrait Background - optimized for all iPad models in portrait */}
+      <div className="hidden sm:block xl:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
         <div 
           className="iceberg-background w-full h-[600vh] bg-no-repeat"
           style={{
@@ -762,8 +762,24 @@ export default function QuotePage() {
         />
       </div>
 
+      {/* Asus Zenbook Fold Portrait - specific override for better SVG positioning */}
+      <style jsx>{`
+        @media (min-width: 840px) and (max-width: 860px) and (orientation: portrait) {
+          .iceberg-background {
+            background-position: center -1200px !important;
+          }
+        }
+        
+        /* iPad Mini and iPad Air Landscape - pull SVG down for better positioning */
+        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
+          .iceberg-background {
+            background-position: center -100px !important;
+          }
+        }
+      `}</style>
+
       {/* Desktop Background - original positioning */}
-      <div className="hidden lg:block fixed inset-0 w-full h-full overflow-hidden z-0">
+      <div className="hidden xl:block fixed inset-0 w-full h-full overflow-hidden z-0">
         <div 
           className="iceberg-background w-full h-[600vh] bg-center bg-no-repeat"
           style={{
