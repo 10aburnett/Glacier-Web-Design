@@ -62,6 +62,7 @@ const budgetRanges = [
 export default function QuotePage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [fileUploadError, setFileUploadError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     projectType: '',
     features: [] as string[],
@@ -107,6 +108,9 @@ export default function QuotePage() {
   }
 
   const handleFileUpload = async (files: FileList) => {
+    // Clear any previous error
+    setFileUploadError(null)
+    
     // Only allow safe image formats and PDFs - explicitly exclude SVGs for security
     const allowedTypes = [
       'image/jpeg',
@@ -119,10 +123,43 @@ export default function QuotePage() {
       'application/pdf'
     ]
     
-    const newFiles = Array.from(files).filter(file => 
+    const allFiles = Array.from(files)
+    const validFiles = allFiles.filter(file => 
       file.size <= 10 * 1024 * 1024 && // 10MB limit
       allowedTypes.includes(file.type.toLowerCase())
     )
+    
+    // Check for rejected files and show specific error messages
+    const rejectedFiles = allFiles.filter(file => 
+      file.size > 10 * 1024 * 1024 || 
+      !allowedTypes.includes(file.type.toLowerCase())
+    )
+    
+    if (rejectedFiles.length > 0) {
+      const svgFiles = rejectedFiles.filter(file => file.type === 'image/svg+xml')
+      const oversizedFiles = rejectedFiles.filter(file => file.size > 10 * 1024 * 1024)
+      const unsupportedFiles = rejectedFiles.filter(file => 
+        file.size <= 10 * 1024 * 1024 && 
+        !allowedTypes.includes(file.type.toLowerCase()) &&
+        file.type !== 'image/svg+xml'
+      )
+      
+      let errorMessage = ''
+      if (svgFiles.length > 0) {
+        errorMessage += `SVG files are not allowed for security reasons (${svgFiles.map(f => f.name).join(', ')}). `
+      }
+      if (oversizedFiles.length > 0) {
+        errorMessage += `Files over 10MB are not allowed (${oversizedFiles.map(f => f.name).join(', ')}). `
+      }
+      if (unsupportedFiles.length > 0) {
+        errorMessage += `Unsupported file format (${unsupportedFiles.map(f => f.name).join(', ')}). `
+      }
+      errorMessage += 'Please use JPG, PNG, GIF, WebP, BMP, TIFF, or PDF files only.'
+      
+      setFileUploadError(errorMessage)
+    }
+    
+    const newFiles = validFiles
     
     // Convert files to base64 for API submission
     const convertedFiles = await Promise.all(
@@ -483,7 +520,17 @@ export default function QuotePage() {
                   <p className="text-white/60">Upload inspiration images, logos, or brand assets</p>
                   <p className="text-white/40 text-sm mt-1">Drag and drop files here or click to browse</p>
                   <p className="text-white/40 text-xs mt-1">Max 10MB per file • JPG, PNG, GIF, WebP, BMP, TIFF, PDF only</p>
+                  <p className="text-red-400 text-xs mt-1">⚠️ SVG files are blocked for security reasons</p>
                 </div>
+
+                {/* File Upload Error Message */}
+                {fileUploadError && (
+                  <div className="p-4 bg-red-500/20 border border-red-400/40 rounded-xl">
+                    <p className="text-red-300 text-sm">
+                      <span className="font-semibold">Upload Error:</span> {fileUploadError}
+                    </p>
+                  </div>
+                )}
 
                 {formData.uploadedFiles.length > 0 && (
                   <div className="mt-4 space-y-2">
