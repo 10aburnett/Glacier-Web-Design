@@ -149,6 +149,13 @@ html, body {
     }
   }
 
+  /* Surface Duo Landscape */
+  @media (width: 720px) and (height: 540px) and (orientation: landscape) {
+    section .section-padding.relative.z-10 {
+      margin-top: -14rem !important;
+    }
+  }
+
   /* Nest Hub Landscape */
   @media (min-width: 1020px) and (max-width: 1030px) and (min-height: 595px) and (max-height: 605px) and (orientation: landscape) {
     .section-padding.relative.z-10 {
