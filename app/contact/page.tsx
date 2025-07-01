@@ -19,6 +19,7 @@ export default function ContactPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [showMessage, setShowMessage] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -43,6 +44,7 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmitStatus('success')
+        setShowMessage(true)
         // Reset form
         setFormData({
           name: '',
@@ -52,12 +54,17 @@ export default function ContactPage() {
           budget: '',
           message: ''
         })
-        // Auto-hide success message after 5 seconds (allowing for fade-out)
+        // Start fade-out after 4 seconds
+        setTimeout(() => {
+          setShowMessage(false)
+        }, 4000)
+        // Clear status after fade-out completes
         setTimeout(() => {
           setSubmitStatus('idle')
-        }, 5000)
+        }, 5500)
       } else {
         setSubmitStatus('error')
+        setShowMessage(true)
       }
     } catch (error) {
       console.error('Contact form error:', error)
@@ -304,11 +311,15 @@ export default function ContactPage() {
                     {submitStatus === 'success' && (
                       <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        animate={{ 
+                          opacity: showMessage ? 1 : 0, 
+                          y: 0, 
+                          scale: showMessage ? 1 : 0.98 
+                        }}
                         exit={{ opacity: 0, y: -5, scale: 0.98 }}
                         transition={{ 
-                          duration: 0.3,
-                          exit: { duration: 1.2, ease: "easeOut" }
+                          duration: showMessage ? 0.3 : 1.5,
+                          ease: showMessage ? "easeOut" : "easeInOut"
                         }}
                         className="p-6 glass-dark backdrop-blur-xl border border-glacier-400/40 rounded-2xl text-center shadow-lg shadow-glacier-500/20"
                       >
@@ -333,11 +344,15 @@ export default function ContactPage() {
                     {submitStatus === 'error' && (
                       <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        animate={{ 
+                          opacity: showMessage ? 1 : 0, 
+                          y: 0, 
+                          scale: showMessage ? 1 : 0.98 
+                        }}
                         exit={{ opacity: 0, y: -5, scale: 0.98 }}
                         transition={{ 
-                          duration: 0.3,
-                          exit: { duration: 1.2, ease: "easeOut" }
+                          duration: showMessage ? 0.3 : 1.5,
+                          ease: showMessage ? "easeOut" : "easeInOut"
                         }}
                         className="p-6 glass-dark backdrop-blur-xl border border-red-400/40 rounded-2xl text-center shadow-lg shadow-red-500/20"
                       >
