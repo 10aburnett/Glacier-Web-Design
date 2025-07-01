@@ -1,7 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import Link from 'next/link'
+import { useScrollToTop } from '@/components/LenisProvider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { 
@@ -93,6 +95,13 @@ const workflowSteps = [
 ]
 
 export default function WhyGlacierPage() {
+  const { scrollToTop } = useScrollToTop()
+  
+  // Ensure page loads at top
+  useEffect(() => {
+    scrollToTop()
+  }, [scrollToTop])
+  
   return (
     <main className="min-h-screen bg-gradient-to-b from-ice-950 via-glacier-950 to-ice-950">
       <Navbar />

@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { useRouter } from 'next/navigation'
 import Lenis from 'lenis'
 
 interface LenisContextType {
@@ -12,6 +13,31 @@ const LenisContext = createContext<LenisContextType>({ lenis: null })
 export const useLenis = () => {
   const context = useContext(LenisContext)
   return context.lenis
+}
+
+// Custom hook for navigation with scroll to top
+export const useScrollToTop = () => {
+  const lenis = useLenis()
+  const router = useRouter()
+
+  const navigateAndScrollToTop = (href: string) => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
+    router.push(href)
+  }
+
+  const scrollToTop = () => {
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.2 })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
+  return { navigateAndScrollToTop, scrollToTop }
 }
 
 interface LenisProviderProps {

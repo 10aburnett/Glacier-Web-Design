@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { useScrollToTop } from '@/components/LenisProvider'
 
 export default function CTASection() {
+  const { navigateAndScrollToTop } = useScrollToTop()
+  
   return (
     <section className="py-32 relative">
       <div className="section-padding relative z-10">
@@ -43,20 +46,17 @@ export default function CTASection() {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-                           <motion.div
-               whileHover={{ scale: 1.05 }}
-               whileTap={{ scale: 0.95 }}
-             >
-               <Link
-                 href="/quote"
-                 className="group px-8 py-3 bg-white/90 text-glacier-700 font-semibold rounded-full 
-                          transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-white
-                          flex items-center justify-center gap-2"
-               >
-                 Get Your Free Quote
-                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-               </Link>
-             </motion.div>
+              <motion.button
+                onClick={() => navigateAndScrollToTop('/quote')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group px-8 py-3 bg-white/90 text-glacier-700 font-semibold rounded-full 
+                         transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-white
+                         flex items-center justify-center gap-2"
+              >
+                Get Your Free Quote
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
               
               <motion.a
                 href="/contact"

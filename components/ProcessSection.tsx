@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
+import { useScrollToTop } from '@/components/LenisProvider'
 import { Search, Palette, Microscope, Rocket, ArrowRight } from 'lucide-react'
 
 const processSteps = [
@@ -66,6 +67,7 @@ export default function ProcessSection() {
     target: containerRef,
     offset: ["start end", "end start"]
   })
+  const { navigateAndScrollToTop } = useScrollToTop()
 
   return (
     <section ref={containerRef} className="py-32 relative">
@@ -151,11 +153,14 @@ export default function ProcessSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Link href="/quote" className="inline-block px-8 py-3 bg-gradient-to-r from-glacier-500/20 to-glacier-600/20 backdrop-blur-md 
-                         text-white font-semibold rounded-full border border-glacier-400/30 
-                         transition-all duration-300 hover:bg-glacier-500/30 hover:border-glacier-400/50 hover:scale-105">
+          <button 
+            onClick={() => navigateAndScrollToTop('/quote')}
+            className="inline-block px-8 py-3 bg-gradient-to-r from-glacier-500/20 to-glacier-600/20 backdrop-blur-md 
+                       text-white font-semibold rounded-full border border-glacier-400/30 
+                       transition-all duration-300 hover:bg-glacier-500/30 hover:border-glacier-400/50 hover:scale-105"
+          >
             Start Your Journey →
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { Mountain, Mail, Phone, Calendar } from 'lucide-react'
 import Link from 'next/link'
+import { useScrollToTop } from '@/components/LenisProvider'
 
 const footerLinks = {
   company: [
@@ -24,6 +25,8 @@ const socialLinks = [
 ]
 
 export default function Footer() {
+  const { navigateAndScrollToTop } = useScrollToTop()
+  
   return (
     <footer className="relative pt-20 pb-8">
       <div className="section-padding relative z-10">
@@ -67,13 +70,24 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
-                    >
-                      <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                      {link.name}
-                    </Link>
+                    {/* Use button for navigation links that need scroll to top */}
+                    {['Home', 'About', 'Why Glacier?'].includes(link.name) ? (
+                      <button 
+                        onClick={() => navigateAndScrollToTop(link.href)}
+                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
+                      >
+                        <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link 
+                        href={link.href}
+                        className="text-white/60 hover:text-white transition-colors inline-flex items-center gap-2 group text-sm"
+                      >
+                        <span className="w-1 h-1 bg-glacier-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

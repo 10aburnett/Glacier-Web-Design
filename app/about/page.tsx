@@ -1,7 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import Link from 'next/link'
+import { useScrollToTop } from '@/components/LenisProvider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { TrendingUp, Shield, Mountain, Sparkles } from 'lucide-react'
@@ -32,6 +34,13 @@ const values = [
 ]
 
 export default function AboutPage() {
+  const { navigateAndScrollToTop, scrollToTop } = useScrollToTop()
+  
+  // Ensure page loads at top
+  useEffect(() => {
+    scrollToTop()
+  }, [scrollToTop])
+  
   return (
     <main className="min-h-screen bg-gradient-to-b from-ice-950 via-glacier-950 to-ice-950">
       <Navbar />
@@ -148,10 +157,13 @@ export default function AboutPage() {
             <p className="text-xl text-glacier-200 mb-8">
               Let's discuss how we can help you achieve your business goals
             </p>
-            <Link href="/quote" className="btn-primary inline-block">
+            <button 
+              onClick={() => navigateAndScrollToTop('/quote')}
+              className="btn-primary inline-block"
+            >
               Start Your Journey
               <span className="inline-block ml-2">→</span>
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>
