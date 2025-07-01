@@ -46,7 +46,7 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fintech-accent rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-fintech-primary rounded-full blur-3xl" />
@@ -59,11 +59,11 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="text-mobile-section-heading lg:text-7xl font-bold mb-4 md:mb-6">
               <span className="text-gradient">About</span>
               <span className="text-white"> Glacier</span>
             </h1>
-            <p className="text-xl md:text-2xl text-glacier-200 leading-relaxed">
+            <p className="text-mobile-body-large text-glacier-200 leading-relaxed">
               We're not just another web agency. We're digital architects crafting 
               high-performance experiences that transform businesses.
             </p>
@@ -83,7 +83,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6 text-white">
                 Our Story
               </h2>
               <p className="text-lg text-glacier-200 mb-6 leading-relaxed">

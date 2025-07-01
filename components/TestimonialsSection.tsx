@@ -32,16 +32,16 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-32 relative">
+    <section className="py-mobile-section relative">
       <div className="section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-mobile-section"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6">
             <span className="text-white drop-shadow-lg">What Our</span>
             <br />
             <span className="text-gradient drop-shadow-lg">Clients Say</span>

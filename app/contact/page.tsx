@@ -102,7 +102,7 @@ export default function ContactPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full">
             <svg className="absolute bottom-0 w-full h-64" viewBox="0 0 1440 320" preserveAspectRatio="none">
@@ -121,12 +121,12 @@ export default function ContactPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="text-mobile-section-heading lg:text-7xl font-bold mb-4 md:mb-6">
               <span className="text-white">Contact Us To</span>
               <br />
               <span className="text-gradient">Get Started</span>
             </h1>
-            <p className="text-xl md:text-2xl text-glacier-200 leading-relaxed">
+            <p className="text-mobile-body-large text-glacier-200 leading-relaxed">
               Ready to transform your digital presence? We're here to help 
               bring your vision to life.
             </p>

@@ -177,7 +177,7 @@ export default function ServicesPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <motion.div 
             animate={{ 
@@ -199,12 +199,12 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="text-mobile-section-heading lg:text-7xl font-bold mb-4 md:mb-6">
               <span className="text-white">Premium</span>
               <br />
               <span className="text-gradient">Web Services</span>
             </h1>
-            <p className="text-xl md:text-2xl text-glacier-200 leading-relaxed">
+            <p className="text-mobile-body-large text-glacier-200 leading-relaxed">
               Comprehensive solutions designed to elevate your digital presence 
               and drive measurable business growth
             </p>
@@ -213,7 +213,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Main Services Grid */}
-      <section className="py-20">
+      <section className="py-mobile-section">
         <div className="section-padding">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {services.map((service, index) => {
@@ -242,7 +242,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-2xl font-bold text-white mb-3">
+                    <h3 className="text-mobile-card-heading font-bold text-white mb-3">
                       {service.title}
                     </h3>
                     <p className="text-glacier-200 mb-6">

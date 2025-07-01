@@ -69,7 +69,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+            className="text-mobile-hero font-bold mb-4 md:mb-6"
           >
             <div className="text-left -ml-4 md:-ml-8 lg:-ml-12">
             <span className="text-gradient">Web Design</span>

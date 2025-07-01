@@ -63,16 +63,16 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-32 relative">
+    <section id="contact" className="py-mobile-section relative">
       <div className="section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-mobile-section"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6">
             <span className="text-white drop-shadow-lg">Let's Start Your</span>
             <br />
             <span className="text-gradient drop-shadow-lg">Transformation</span>
@@ -80,8 +80,8 @@ export default function ContactSection() {
         </motion.div>
 
         <div className="max-w-5xl mx-auto">
-          <div className="glass-dark rounded-3xl p-8 md:p-12 backdrop-blur-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="glass-dark rounded-3xl px-mobile-comfortable py-8 md:p-12 backdrop-blur-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-mobile-cards lg:gap-8">
               {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}

@@ -5,10 +5,10 @@ import ServicesMenu from './ServicesMenu'
 
 export default function ServicesSection() {
   return (
-    <section className="py-32 relative">
+    <section className="py-mobile-section-large relative">
       <div className="section-padding">
-                  <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 overflow-hidden">
+                  <div className="text-center mb-mobile-section">
+            <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6 overflow-hidden">
               <motion.span 
                 initial={{ x: -200, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}

@@ -280,7 +280,7 @@ export default function QuotePage() {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-2">What type of project do you need?</h2>
+              <h2 className="text-mobile-card-heading md:text-3xl font-bold text-white mb-2">What type of project do you need?</h2>
               <p className="text-white/70">Select the option that best describes your project</p>
             </div>
             
@@ -330,7 +330,7 @@ export default function QuotePage() {
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-2">What features do you need?</h2>
+              <h2 className="text-mobile-card-heading md:text-3xl font-bold text-white mb-2">What features do you need?</h2>
               <p className="text-white/70">Select all features that apply to your project</p>
             </div>
             
@@ -726,11 +726,11 @@ export default function QuotePage() {
         <div className="pt-20">
         <div className="section-padding py-12">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h1 className="text-mobile-section-heading font-bold text-white mb-4">
               Get Your <span className="text-gradient">Custom Quote</span>
             </h1>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            <p className="text-mobile-body-large text-white/80 max-w-2xl mx-auto">
               Tell us about your project and receive a personalized quote within 24 hours
             </p>
           </div>

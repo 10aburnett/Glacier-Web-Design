@@ -120,17 +120,17 @@ export default function WhyGlacierPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="text-mobile-section-heading lg:text-7xl font-bold mb-4 md:mb-6">
               <span className="text-white">Why</span>
               <br />
               <span className="text-gradient">Glacier?</span>
             </h1>
-            <p className="text-xl md:text-2xl text-glacier-200 leading-relaxed mb-8">
+            <p className="text-mobile-body-large text-glacier-200 leading-relaxed mb-6 md:mb-8">
               We're not a big agency with a dozen departments and overpriced packages. 
               We're two designers and developers — Will and Alex — who combine cutting-edge 
               tech skills with clean, powerful design.
             </p>
-            <p className="text-lg text-glacier-300">
+            <p className="text-mobile-body text-glacier-300">
               We've built Glacier for one reason: to help businesses like yours look great online without the stress.
             </p>
           </motion.div>
@@ -147,7 +147,7 @@ export default function WhyGlacierPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Approach</h2>
+            <h2 className="text-mobile-section-heading font-bold text-white mb-4">Our Approach</h2>
             <p className="text-xl text-glacier-200">Why people choose us over traditional agencies</p>
           </motion.div>
 
