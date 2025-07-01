@@ -152,7 +152,7 @@ html, body {
   /* Surface Duo Landscape */
   @media (width: 720px) and (height: 540px) and (orientation: landscape) {
     section .section-padding.relative.z-10 {
-      margin-top: 0rem !important;
+      margin-top: -3rem !important;
     }
   }
 
