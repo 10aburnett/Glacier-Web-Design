@@ -31,9 +31,9 @@ export default function Footer() {
     <footer className="relative pt-20 pb-8">
       <div className="section-padding relative z-10">
         <div className="glass-dark rounded-3xl p-8 md:p-12 backdrop-blur-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             {/* Logo & Description */}
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <Mountain className="w-10 h-10 text-glacier-400" />
                 <div>
