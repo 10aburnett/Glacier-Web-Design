@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Mail, Phone, MapPin, Send, Calendar } from 'lucide-react'
@@ -52,10 +52,10 @@ export default function ContactPage() {
           budget: '',
           message: ''
         })
-        // Auto-hide success message after 4 seconds
+        // Auto-hide success message after 5 seconds (allowing for fade-out)
         setTimeout(() => {
           setSubmitStatus('idle')
-        }, 4000)
+        }, 5000)
       } else {
         setSubmitStatus('error')
       }
@@ -300,54 +300,62 @@ export default function ContactPage() {
                   </motion.button>
 
                   {/* Status Messages */}
-                  {submitStatus === 'success' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      transition={{ duration: 0.3 }}
-                      className="p-6 glass-dark backdrop-blur-xl border border-glacier-400/40 rounded-2xl text-center shadow-lg shadow-glacier-500/20"
-                    >
-                      <div className="flex items-center justify-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-glacier-400 to-fintech-accent flex items-center justify-center">
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                          >
-                            ✓
-                          </motion.div>
+                  <AnimatePresence>
+                    {submitStatus === 'success' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -5, scale: 0.98 }}
+                        transition={{ 
+                          duration: 0.3,
+                          exit: { duration: 1.2, ease: "easeOut" }
+                        }}
+                        className="p-6 glass-dark backdrop-blur-xl border border-glacier-400/40 rounded-2xl text-center shadow-lg shadow-glacier-500/20"
+                      >
+                        <div className="flex items-center justify-center gap-3 mb-2">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-glacier-400 to-fintech-accent flex items-center justify-center">
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                            >
+                              ✓
+                            </motion.div>
+                          </div>
+                          <h3 className="text-lg font-semibold text-white">Message Sent!</h3>
                         </div>
-                        <h3 className="text-lg font-semibold text-white">Message Sent!</h3>
-                      </div>
-                      <p className="text-glacier-200 text-sm">
-                        Thank you for reaching out. We'll get back to you within 24 hours.
-                      </p>
-                    </motion.div>
-                  )}
+                        <p className="text-glacier-200 text-sm">
+                          Thank you for reaching out. We'll get back to you within 24 hours.
+                        </p>
+                      </motion.div>
+                    )}
 
-                  {submitStatus === 'error' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      transition={{ duration: 0.3 }}
-                      className="p-6 glass-dark backdrop-blur-xl border border-red-400/40 rounded-2xl text-center shadow-lg shadow-red-500/20"
-                    >
-                      <div className="flex items-center justify-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-full bg-red-500/20 border border-red-400/30 flex items-center justify-center">
-                          <span className="text-red-300 text-lg">✕</span>
+                    {submitStatus === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -5, scale: 0.98 }}
+                        transition={{ 
+                          duration: 0.3,
+                          exit: { duration: 1.2, ease: "easeOut" }
+                        }}
+                        className="p-6 glass-dark backdrop-blur-xl border border-red-400/40 rounded-2xl text-center shadow-lg shadow-red-500/20"
+                      >
+                        <div className="flex items-center justify-center gap-3 mb-2">
+                          <div className="w-8 h-8 rounded-full bg-red-500/20 border border-red-400/30 flex items-center justify-center">
+                            <span className="text-red-300 text-lg">✕</span>
+                          </div>
+                          <h3 className="text-lg font-semibold text-white">Send Failed</h3>
                         </div>
-                        <h3 className="text-lg font-semibold text-white">Send Failed</h3>
-                      </div>
-                      <p className="text-glacier-200 text-sm">
-                        Unable to send message. Please try again or email us directly at{' '}
-                        <a href="mailto:infoglacierdesign@gmail.com" className="text-glacier-400 hover:text-glacier-300 transition-colors">
-                          infoglacierdesign@gmail.com
-                        </a>
-                      </p>
-                    </motion.div>
-                  )}
+                        <p className="text-glacier-200 text-sm">
+                          Unable to send message. Please try again or email us directly at{' '}
+                          <a href="mailto:infoglacierdesign@gmail.com" className="text-glacier-400 hover:text-glacier-300 transition-colors">
+                            infoglacierdesign@gmail.com
+                          </a>
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </form>
               </div>
             </motion.div>
