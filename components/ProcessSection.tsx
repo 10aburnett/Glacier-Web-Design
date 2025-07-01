@@ -95,7 +95,10 @@ export default function ProcessSection() {
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
           {/* Mobile Layout */}
-          <div className="md:hidden space-y-6">
+          <div className="md:hidden space-y-6 relative">
+            {/* Mobile Timeline Line - connects icons on left */}
+            <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+            
             {processSteps.map((step, index) => {
               const Icon = step.icon
               return (
