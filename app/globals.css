@@ -85,6 +85,63 @@ html, body {
     }
   }
 
+  /* Mobile landscape hero text positioning fixes for specific devices */
+  /* iPhone XR Landscape */
+  @media (min-width: 890px) and (max-width: 900px) and (max-height: 420px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* iPhone 12/12 Pro Landscape */
+  @media (min-width: 840px) and (max-width: 850px) and (max-height: 400px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* iPhone 14 Pro Max Landscape */
+  @media (min-width: 925px) and (max-width: 940px) and (max-height: 440px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* Pixel 7 Landscape */
+  @media (min-width: 845px) and (max-width: 855px) and (max-height: 400px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* Samsung Galaxy S20 Ultra Landscape */
+  @media (min-width: 910px) and (max-width: 920px) and (max-height: 420px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* Galaxy Z Fold 5 Landscape (Outer Screen) */
+  @media (min-width: 875px) and (max-width: 890px) and (max-height: 350px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* Samsung Galaxy A51/71 Landscape */
+  @media (min-width: 910px) and (max-width: 920px) and (max-height: 420px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: 5rem !important;
+    }
+  }
+
+  /* Nest Hub Landscape */
+  @media (min-width: 1020px) and (max-width: 1030px) and (min-height: 595px) and (max-height: 605px) and (orientation: landscape) {
+    .section-padding.relative.z-10 {
+      margin-top: -12rem !important;
+    }
+  }
+
   /* Specific device optimizations for portrait orientation only */
   /* iPad Air Portrait */
   @media (min-width: 810px) and (max-width: 830px) and (orientation: portrait) {

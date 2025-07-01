@@ -58,7 +58,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent" />
 
       {/* Main content */}
-      <div className="section-padding relative z-10 -mt-64">
+      <div className="section-padding relative z-10 -mt-64 landscape:max-md:mt-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
