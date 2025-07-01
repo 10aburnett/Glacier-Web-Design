@@ -792,7 +792,7 @@ export default function QuotePage() {
               initial={{ scale: 1 }}
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 0.3 }}
-              className="fixed bottom-[-64px] sm:bottom-6 right-6 z-50"
+              className="fixed bottom-[-64px] sm:bottom-[-64px] lg:bottom-12 right-6 z-50"
             >
               <div className="glass-dark rounded-2xl p-4 backdrop-blur-xl border border-glacier-400/30 shadow-lg">
                 <div className="text-center">
