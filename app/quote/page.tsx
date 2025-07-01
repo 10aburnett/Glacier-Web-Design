@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useLenis } from '@/components/LenisProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
@@ -63,6 +64,11 @@ export default function QuotePage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [fileUploadError, setFileUploadError] = useState<string | null>(null)
+  const lenis = useLenis()
+
+
+
+
 
   const [formData, setFormData] = useState({
     projectType: '',
@@ -87,25 +93,34 @@ export default function QuotePage() {
 
   const totalSteps = 6
 
+  // WORK WITH LENIS - use its own methods instead of fighting it
+  const forceScrollToTop = () => {
+    if (lenis) {
+      // Use Lenis's immediate scroll to avoid conflicts
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      // Fallback for when Lenis isn't loaded yet
+      window.scrollTo(0, 0)
+    }
+  }
+
   const nextStep = () => {
     if (currentStep < totalSteps) {
-      // INSTANT scroll BEFORE state change - bulletproof across all devices
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-      
       setCurrentStep(currentStep + 1)
+      // Scroll AFTER React re-renders
+      setTimeout(() => forceScrollToTop(), 0)
+      setTimeout(() => forceScrollToTop(), 10)
+      setTimeout(() => forceScrollToTop(), 100)
     }
   }
 
   const prevStep = () => {
     if (currentStep > 1) {
-      // INSTANT scroll BEFORE state change - bulletproof across all devices
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-      
       setCurrentStep(currentStep - 1)
+      // Scroll AFTER React re-renders
+      setTimeout(() => forceScrollToTop(), 0)
+      setTimeout(() => forceScrollToTop(), 10)
+      setTimeout(() => forceScrollToTop(), 100)
     }
   }
 
@@ -260,10 +275,7 @@ export default function QuotePage() {
   }
 
   const handleSubmit = async () => {
-    // INSTANT scroll BEFORE submission - bulletproof across all devices
-    window.scrollTo(0, 0)
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
+    forceScrollToTop()
     
     try {
       console.log('Submitting quote with data:', formData)
@@ -724,6 +736,8 @@ export default function QuotePage() {
 
   return (
     <>
+
+
       {/* Fixed Parallax Iceberg Background */}
       <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
         <div 
