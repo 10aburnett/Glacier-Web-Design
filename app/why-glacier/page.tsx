@@ -95,7 +95,7 @@ const workflowSteps = [
 ]
 
 export default function WhyGlacierPage() {
-  const { scrollToTop } = useScrollToTop()
+  const { scrollToTop, navigateAndScrollToTop } = useScrollToTop()
   
   // Ensure page loads at top
   useEffect(() => {
@@ -372,13 +372,13 @@ export default function WhyGlacierPage() {
             </p>
             
             <div className="flex justify-center">
-              <Link 
-                href="/contact"
+              <button 
+                onClick={() => navigateAndScrollToTop('/contact')}
                 className="btn-primary inline-flex items-center justify-center"
               >
                 Contact Us
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
+              </button>
             </div>
           </motion.div>
         </div>
