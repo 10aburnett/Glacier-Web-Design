@@ -738,8 +738,20 @@ export default function QuotePage() {
     <>
 
 
-      {/* Fixed Parallax Iceberg Background */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
+      {/* Mobile Background - positioned higher */}
+      <div className="sm:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
+        <div 
+          className="iceberg-background w-full h-[600vh] bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/assets/IcebergBG5.svg?v=3)',
+            backgroundSize: '160% 600vh',
+            backgroundPosition: 'center -1600px',
+          }}
+        />
+      </div>
+
+      {/* Desktop/Tablet Background - original positioning */}
+      <div className="hidden sm:block fixed inset-0 w-full h-full overflow-hidden z-0">
         <div 
           className="iceberg-background w-full h-[600vh] bg-center bg-no-repeat"
           style={{
