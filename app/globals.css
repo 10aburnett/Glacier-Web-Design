@@ -85,6 +85,102 @@ html, body {
     }
   }
 
+  /* Specific device optimizations for portrait orientation only */
+  /* iPad Air Portrait */
+  @media (min-width: 810px) and (max-width: 830px) and (orientation: portrait) {
+    .iceberg-background.state-top {
+      background-position: center -1250px !important;
+    }
+    .iceberg-background.state-upper {
+      background-position: center calc(20% - 1250px) !important;
+    }
+    .iceberg-background.state-waterline {
+      background-position: center calc(40% - 1250px) !important;
+    }
+    .iceberg-background.state-upper-deep {
+      background-position: center calc(60% - 1250px) !important;
+    }
+    .iceberg-background.state-deep {
+      background-position: center calc(80% - 1250px) !important;
+    }
+  }
+
+  /* iPad Pro 11" Portrait */
+  @media (min-width: 830px) and (max-width: 840px) and (orientation: portrait) {
+    .iceberg-background.state-top {
+      background-position: center -1250px !important;
+    }
+    .iceberg-background.state-upper {
+      background-position: center calc(20% - 1250px) !important;
+    }
+    .iceberg-background.state-waterline {
+      background-position: center calc(40% - 1250px) !important;
+    }
+    .iceberg-background.state-upper-deep {
+      background-position: center calc(60% - 1250px) !important;
+    }
+    .iceberg-background.state-deep {
+      background-position: center calc(80% - 1250px) !important;
+    }
+  }
+
+  /* Asus Zenbook Fold Portrait */
+  @media (min-width: 845px) and (max-width: 865px) and (orientation: portrait) {
+    .iceberg-background.state-top {
+      background-position: center -1350px !important;
+    }
+    .iceberg-background.state-upper {
+      background-position: center calc(20% - 1350px) !important;
+    }
+    .iceberg-background.state-waterline {
+      background-position: center calc(40% - 1350px) !important;
+    }
+    .iceberg-background.state-upper-deep {
+      background-position: center calc(60% - 1350px) !important;
+    }
+    .iceberg-background.state-deep {
+      background-position: center calc(80% - 1350px) !important;
+    }
+  }
+
+  /* Surface Pro 7 Portrait */
+  @media (min-width: 900px) and (max-width: 920px) and (orientation: portrait) {
+    .iceberg-background.state-top {
+      background-position: center -1400px !important;
+    }
+    .iceberg-background.state-upper {
+      background-position: center calc(20% - 1400px) !important;
+    }
+    .iceberg-background.state-waterline {
+      background-position: center calc(40% - 1400px) !important;
+    }
+    .iceberg-background.state-upper-deep {
+      background-position: center calc(60% - 1400px) !important;
+    }
+    .iceberg-background.state-deep {
+      background-position: center calc(80% - 1400px) !important;
+    }
+  }
+
+  /* iPad Pro 12.9" Portrait */
+  @media (min-width: 1020px) and (max-width: 1030px) and (orientation: portrait) {
+    .iceberg-background.state-top {
+      background-position: center -1250px !important;
+    }
+    .iceberg-background.state-upper {
+      background-position: center calc(20% - 1250px) !important;
+    }
+    .iceberg-background.state-waterline {
+      background-position: center calc(40% - 1250px) !important;
+    }
+    .iceberg-background.state-upper-deep {
+      background-position: center calc(60% - 1250px) !important;
+    }
+    .iceberg-background.state-deep {
+      background-position: center calc(80% - 1250px) !important;
+    }
+  }
+
   /* Enhanced Glassmorphism Effects for Content Over Background */
   .glass {
     @apply backdrop-blur-lg bg-white/75 border border-white/90 shadow-xl;
