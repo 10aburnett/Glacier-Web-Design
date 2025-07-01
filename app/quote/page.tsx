@@ -80,7 +80,7 @@ export default function QuotePage() {
     goals: '',
     targetAudience: '',
     additionalNotes: '',
-    uploadedFiles: [] as File[]
+    uploadedFiles: [] as Array<{name: string, size: number, type: string, data: string}>
   })
 
   const totalSteps = 6
@@ -106,15 +106,33 @@ export default function QuotePage() {
     }))
   }
 
-  const handleFileUpload = (files: FileList) => {
+  const handleFileUpload = async (files: FileList) => {
     const newFiles = Array.from(files).filter(file => 
       file.size <= 10 * 1024 * 1024 && // 10MB limit
       (file.type.startsWith('image/') || file.type === 'application/pdf')
     )
     
+    // Convert files to base64 for API submission
+    const convertedFiles = await Promise.all(
+      newFiles.map(file => {
+        return new Promise<{name: string, size: number, type: string, data: string}>((resolve) => {
+          const reader = new FileReader()
+          reader.onload = () => {
+            resolve({
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              data: reader.result as string
+            })
+          }
+          reader.readAsDataURL(file)
+        })
+      })
+    )
+    
     setFormData(prev => ({
       ...prev,
-      uploadedFiles: [...prev.uploadedFiles, ...newFiles]
+      uploadedFiles: [...prev.uploadedFiles, ...convertedFiles]
     }))
   }
 
@@ -129,10 +147,10 @@ export default function QuotePage() {
     e.preventDefault()
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault()
     if (e.dataTransfer.files) {
-      handleFileUpload(e.dataTransfer.files)
+      await handleFileUpload(e.dataTransfer.files)
     }
   }
 
@@ -181,6 +199,8 @@ export default function QuotePage() {
 
   const handleSubmit = async () => {
     try {
+      console.log('Submitting quote with data:', formData)
+      
       const response = await fetch('/api/send-quote', {
         method: 'POST',
         headers: {
@@ -189,14 +209,15 @@ export default function QuotePage() {
         body: JSON.stringify(formData),
       })
 
+      const result = await response.json()
+      console.log('Quote API response:', result)
+
       if (response.ok) {
-        const result = await response.json()
-        console.log('Quote sent successfully:', result)
+        console.log('Quote submitted successfully:', result)
         setIsSubmitted(true)
       } else {
-        const error = await response.json()
-        console.error('Failed to send quote:', error)
-        alert('Failed to submit quote request. Please try again.')
+        console.error('Quote submission failed:', result)
+        alert(`Failed to submit quote request: ${result.error || 'Unknown error'}. Please try again.`)
       }
     } catch (error) {
       console.error('Error submitting quote:', error)
