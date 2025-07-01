@@ -262,10 +262,10 @@ export default function ContactPage() {
                                text-white"
                     >
                       <option value="" className="bg-ice-950">Select Budget Range</option>
-                      <option value="5-10k" className="bg-ice-950">$5,000 - $10,000</option>
-                      <option value="10-25k" className="bg-ice-950">$10,000 - $25,000</option>
-                      <option value="25-50k" className="bg-ice-950">$25,000 - $50,000</option>
-                      <option value="50k+" className="bg-ice-950">$50,000+</option>
+                      <option value="0-1k" className="bg-ice-950">£0 - £1,000</option>
+                      <option value="1k-3k" className="bg-ice-950">£1,000 - £3,000</option>
+                      <option value="3k-10k" className="bg-ice-950">£3,000 - £10,000</option>
+                      <option value="10k+" className="bg-ice-950">£10,000+</option>
                     </select>
                   </div>
 
