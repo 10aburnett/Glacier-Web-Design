@@ -59,7 +59,7 @@ export default function ServicesMenu() {
   }
 
   return (
-    <div className="flex flex-wrap justify-center items-center gap-3 max-w-3xl mx-auto">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-3 max-w-3xl mx-auto">
       {services.map((service, index) => (
         <ServicePill
           key={index}
