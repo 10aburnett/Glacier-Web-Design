@@ -450,13 +450,13 @@ export default function QuotePage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setFormData(prev => ({ ...prev, timeline: timeline.id }))}
-                    className={`p-4 rounded-xl border transition-all text-center ${
+                    className={`p-4 rounded-xl border transition-all text-center flex items-center justify-center ${
                       formData.timeline === timeline.id
                         ? 'bg-white/20 border-white/40'
                         : 'bg-white/5 border-white/20 hover:bg-white/10'
                     }`}
                   >
-                    <h4 className="text-white font-medium">{timeline.title}</h4>
+                    <h4 className="text-white font-medium text-center">{timeline.title}</h4>
                   </motion.button>
                 ))}
               </div>
@@ -909,7 +909,7 @@ export default function QuotePage() {
                     whileTap={{ scale: 0.95 }}
                     onClick={prevStep}
                     disabled={currentStep === 1}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+                    className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full transition-all ${
                       currentStep === 1
                         ? 'bg-white/5 text-white/40 cursor-not-allowed'
                         : 'bg-white/10 text-white hover:bg-white/20'
@@ -923,9 +923,14 @@ export default function QuotePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={currentStep === totalSteps ? handleSubmit : nextStep}
-                    className="flex items-center gap-2 px-6 py-3 bg-glacier-500 text-white rounded-full hover:bg-glacier-600 transition-all"
+                    className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-glacier-500 text-white rounded-full hover:bg-glacier-600 transition-all"
                   >
-                    {currentStep === totalSteps ? 'Submit Quote Request' : 'Continue'}
+                    <span className="hidden sm:inline">
+                      {currentStep === totalSteps ? 'Submit Quote Request' : 'Continue'}
+                    </span>
+                    <span className="sm:hidden">
+                      {currentStep === totalSteps ? 'Submit' : 'Continue'}
+                    </span>
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
                 </div>
