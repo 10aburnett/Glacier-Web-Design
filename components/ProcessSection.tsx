@@ -79,7 +79,7 @@ export default function ProcessSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6">
             <span className="text-white drop-shadow-lg">Our Proven</span>
             <br />
             <span className="text-gradient drop-shadow-lg">4-Phase Process</span>
@@ -89,12 +89,59 @@ export default function ProcessSection() {
           </p>
         </motion.div>
 
-        {/* Elegant Timeline */}
+        {/* Mobile: Simple Vertical Stack, Desktop: Elegant Timeline */}
         <div className="max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+          {/* Timeline Line - Desktop Only */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
-          <div className="space-y-12">
+          {/* Mobile Layout */}
+          <div className="md:hidden space-y-6">
+            {processSteps.map((step, index) => {
+              const Icon = step.icon
+              return (
+                <motion.div
+                  key={step.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-start gap-4"
+                >
+                  {/* Icon */}
+                  <motion.div
+                    initial={{ scale: 1, rotate: 0 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    whileHover={{ scale: 1.1, rotate: 180 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="flex-shrink-0"
+                    key={`mobile-process-icon-${step.id}`}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-glacier-400 to-glacier-600 p-0.5">
+                      <div className="w-full h-full rounded-full bg-ice-900/90 flex items-center justify-center">
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="glass-dark rounded-2xl p-4 backdrop-blur-xl w-full">
+                      <span className="text-xs text-glacier-400 font-semibold">{step.phase}</span>
+                      <h3 className="text-lg font-bold text-white mt-1 mb-2">
+                        {step.title}
+                      </h3>
+                      <p className="text-white/70 text-sm leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Desktop Layout - Unchanged */}
+          <div className="hidden md:block space-y-12">
             {processSteps.map((step, index) => {
               const Icon = step.icon
               const isEven = index % 2 === 0
@@ -128,7 +175,7 @@ export default function ProcessSection() {
                     whileHover={{ scale: 1.2, rotate: 360 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="relative z-10"
-                    key={`process-icon-${step.id}`}
+                    key={`desktop-process-icon-${step.id}`}
                   >
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-glacier-400 to-glacier-600 p-0.5">
                       <div className="w-full h-full rounded-full bg-ice-900/90 flex items-center justify-center">
