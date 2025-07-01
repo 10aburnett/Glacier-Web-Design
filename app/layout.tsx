@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/mountain.svg?v=2', type: 'image/svg+xml' },
-      { url: '/mountain.svg?v=2', sizes: '32x32', type: 'image/svg+xml' },
-      { url: '/mountain.svg?v=2', sizes: '16x16', type: 'image/svg+xml' },
+      { url: '/mountain.svg?v=3', type: 'image/svg+xml' },
+      { url: '/mountain.svg?v=3', sizes: '32x32', type: 'image/svg+xml' },
+      { url: '/mountain.svg?v=3', sizes: '16x16', type: 'image/svg+xml' },
     ],
     apple: [
-      { url: '/mountain.svg?v=2', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/mountain.svg?v=3', sizes: '180x180', type: 'image/svg+xml' },
     ],
-    shortcut: '/mountain.svg?v=2',
+    shortcut: '/mountain.svg?v=3',
   },
 }
 
@@ -35,10 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
-        <link rel="icon" href="/mountain.svg?v=2" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/mountain.svg?v=2" />
-        <link rel="shortcut icon" href="/mountain.svg?v=2" />
-        <meta name="msapplication-TileImage" content="/mountain.svg?v=2" />
+        <link rel="icon" href="/mountain.svg?v=3" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/mountain.svg?v=3" />
+        <link rel="shortcut icon" href="/mountain.svg?v=3" />
+        <meta name="msapplication-TileImage" content="/mountain.svg?v=3" />
       </head>
       <body className="antialiased">
         <LenisProvider>

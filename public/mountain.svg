@@ -13,26 +13,36 @@
         stroke-miterlimit: 10;
       }
 
-      .st2, .st1, .st3 {
+      .st2, .st1, .st3, .st4, .st5 {
         stroke-linecap: round;
       }
 
       .st1 {
-        stroke: #fff;
         stroke-width: .53px;
       }
 
       .st1, .st3 {
+        stroke: #fff;
+      }
+
+      .st1, .st4 {
         stroke-linejoin: round;
       }
 
-      .st3 {
+      .st3, .st4, .st5 {
         fill: #fff;
+      }
+
+      .st4 {
         stroke: #38bdf9;
         stroke-width: 2px;
       }
 
-      .st4 {
+      .st5 {
+        stroke: #231f20;
+      }
+
+      .st6 {
         clip-path: url(#clippath);
       }
     </style>
@@ -40,14 +50,24 @@
       <circle class="st0" cx="12" cy="12" r="12"/>
     </clipPath>
   </defs>
-  <g class="st4">
+  <g class="st6">
     <g>
       <circle class="st2" cx="12" cy="12" r="12"/>
-      <path class="st3" d="M10.52,5.96l4.58,9.16,5.72-5.72,5.72,17.17H3.65L10.52,5.96Z"/>
+      <path class="st4" d="M10.52,5.96l4.58,9.16,5.72-5.72,5.72,17.17H3.65L10.52,5.96Z"/>
     </g>
   </g>
   <line class="st1" x1="10.61" y1="5.95" x2="15.1" y2="15.12"/>
-  <line class="st1" x1="5.22" y1="21.94" x2="10.52" y2="5.96"/>
+  <line class="st1" x1="6.46" y1="18.21" x2="10.52" y2="5.96"/>
+  <line class="st1" x1="5.22" y1="21.94" x2="6.46" y2="18.21"/>
   <line class="st1" x1="23.3" y1="16.79" x2="20.86" y2="9.4"/>
   <line class="st1" x1="15.1" y1="15.12" x2="20.82" y2="9.4"/>
+  <path class="st5" d="M12.41,20.7"/>
+  <path class="st5" d="M12.36,21.44"/>
+  <path class="st5" d="M10.8,22.33"/>
+  <path class="st5" d="M11.07,20.45"/>
+  <path class="st5" d="M9.91,22.68"/>
+  <path class="st5" d="M8.52,20.92"/>
+  <line class="st3" x1="6.31" y1="22.88" x2="11.64" y2="24.24"/>
+  <line class="st3" x1="12.01" y1="24.09" x2="18.75" y2="22.06"/>
+  <line class="st3" x1="18.92" y1="22.02" x2="22.29" y2="18.16"/>
 </svg>
