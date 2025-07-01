@@ -156,10 +156,24 @@ html, body {
     }
   }
 
-  /* Nest Hub Landscape */
+  /* Surface Duo Footer Spacing Fix */
+  @media (width: 720px) and (height: 540px) and (orientation: landscape) {
+    footer {
+      margin-top: 12rem !important;
+    }
+  }
+
+  /* Nest Hub Landscape - Homepage Hero Only */
   @media (min-width: 1020px) and (max-width: 1030px) and (min-height: 595px) and (max-height: 605px) and (orientation: landscape) {
-    .section-padding.relative.z-10 {
+    section[class*="min-h-screen"] .section-padding.relative.z-10 {
       margin-top: -12rem !important;
+    }
+  }
+
+  /* Nest Hub Footer Spacing Fix */
+  @media (width: 1024px) and (height: 600px) and (orientation: landscape) {
+    footer {
+      margin-top: 12rem !important;
     }
   }
 
