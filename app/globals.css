@@ -34,7 +34,7 @@ html, body {
 @layer components {
   /* Iceberg Parallax Background with GPU-optimized states */
   .iceberg-background {
-    background-image: url('/assets/IcebergBG5.svg'), linear-gradient(135deg, 
+    background-image: url('/assets/IcebergBG5.svg?v=2'), linear-gradient(135deg, 
       #0c4a6e 0%,    /* Deep blue for underwater */
       #0ea5e9 25%,   /* Ocean blue */
       #38bdf8 50%,   /* Sky blue */

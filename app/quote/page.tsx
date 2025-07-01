@@ -631,7 +631,7 @@ export default function QuotePage() {
         <div 
           className="iceberg-background w-full h-[600vh] bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(/assets/IcebergBG5.svg)',
+            backgroundImage: 'url(/assets/IcebergBG5.svg?v=2)',
             backgroundSize: '160% 600vh',
           }}
         />
