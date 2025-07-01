@@ -875,15 +875,15 @@ export default function QuotePage() {
                     <h3 className="text-white font-semibold mb-4">What happens next?</h3>
                     <div className="space-y-3 text-white/70 text-left max-w-md mx-auto">
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-glacier-400 rounded-full"></div>
+                        <div className="w-2 h-2 bg-glacier-400 rounded-full flex-shrink-0"></div>
                         <span>We'll review your project requirements</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-glacier-400 rounded-full"></div>
+                        <div className="w-2 h-2 bg-glacier-400 rounded-full flex-shrink-0"></div>
                         <span>Prepare a detailed, personalized quote</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-glacier-400 rounded-full"></div>
+                        <div className="w-2 h-2 bg-glacier-400 rounded-full flex-shrink-0"></div>
                         <span>Contact you within 24 hours to discuss next steps</span>
                       </div>
                     </div>
