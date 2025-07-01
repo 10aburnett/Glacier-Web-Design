@@ -249,6 +249,7 @@ export default function QuotePage() {
   }
 
   const handleSubmit = async () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     try {
       console.log('Submitting quote with data:', formData)
       
