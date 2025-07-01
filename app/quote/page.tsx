@@ -107,9 +107,21 @@ export default function QuotePage() {
   }
 
   const handleFileUpload = async (files: FileList) => {
+    // Only allow safe image formats and PDFs - explicitly exclude SVGs for security
+    const allowedTypes = [
+      'image/jpeg',
+      'image/jpg', 
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/bmp',
+      'image/tiff',
+      'application/pdf'
+    ]
+    
     const newFiles = Array.from(files).filter(file => 
       file.size <= 10 * 1024 * 1024 && // 10MB limit
-      (file.type.startsWith('image/') || file.type === 'application/pdf')
+      allowedTypes.includes(file.type.toLowerCase())
     )
     
     // Convert files to base64 for API submission
@@ -457,7 +469,7 @@ export default function QuotePage() {
                   type="file"
                   id="fileUpload"
                   multiple
-                  accept="image/*,.pdf"
+                  accept=".jpg,.jpeg,.png,.gif,.webp,.bmp,.tiff,.pdf"
                   onChange={(e) => e.target.files && handleFileUpload(e.target.files)}
                   className="hidden"
                 />
@@ -470,7 +482,7 @@ export default function QuotePage() {
                   <Upload className="w-8 h-8 text-white/60 mx-auto mb-2" />
                   <p className="text-white/60">Upload inspiration images, logos, or brand assets</p>
                   <p className="text-white/40 text-sm mt-1">Drag and drop files here or click to browse</p>
-                  <p className="text-white/40 text-xs mt-1">Max 10MB per file • Images and PDFs only</p>
+                  <p className="text-white/40 text-xs mt-1">Max 10MB per file • JPG, PNG, GIF, WebP, BMP, TIFF, PDF only</p>
                 </div>
 
                 {formData.uploadedFiles.length > 0 && (
