@@ -762,6 +762,15 @@ export default function QuotePage() {
         />
       </div>
 
+      {/* Surface Pro 7 Portrait Background Override */}
+      <style jsx>{`
+        @media (width: 912px) and (height: 1368px) and (orientation: portrait) {
+          .iceberg-background {
+            background-position: center -1050px !important;
+          }
+        }
+      `}</style>
+
       {/* Asus Zenbook Fold Portrait - specific override for better SVG positioning */}
       <style jsx>{`
         @media (min-width: 840px) and (max-width: 860px) and (orientation: portrait) {
@@ -792,7 +801,7 @@ export default function QuotePage() {
       <ParallaxBackground />
 
       {/* Main Content - positioned above background */}
-      <main className="relative z-10 min-h-screen">
+      <main className="relative z-10 min-h-screen" data-page="quote">
         <Navbar />
         
         <div className="pt-20">

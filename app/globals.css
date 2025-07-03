@@ -270,6 +270,13 @@ html, body {
     }
   }
 
+  /* Surface Pro 7 Portrait - Quote Page Only (move up 50px) */
+  @media (width: 912px) and (height: 1368px) and (orientation: portrait) {
+    [data-page="quote"] .hidden.sm\\:block.xl\\:hidden .iceberg-background {
+      background-position: center -850px !important;
+    }
+  }
+
   /* iPad Pro 12.9" Portrait */
   @media (min-width: 1020px) and (max-width: 1030px) and (orientation: portrait) {
     .iceberg-background.state-top {

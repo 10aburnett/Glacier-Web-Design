@@ -2,10 +2,9 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
-import Lenis from 'lenis'
 
 interface LenisContextType {
-  lenis: Lenis | null
+  lenis: any | null
 }
 
 const LenisContext = createContext<LenisContextType>({ lenis: null })
@@ -45,41 +44,67 @@ interface LenisProviderProps {
 }
 
 export default function LenisProvider({ children }: LenisProviderProps) {
-  const [lenis, setLenis] = useState<Lenis | null>(null)
+  const [lenis, setLenis] = useState<any | null>(null)
 
   useEffect(() => {
-    // Create a Lenis instance with ultra-smooth settings
-    const lenisInstance = new Lenis({
-      duration: 1.8,            // Increased for more smoothness
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing curve
-      direction: 'vertical',    // Vertical scrolling only
-      smooth: true,             // Enable smooth scrolling
-      mouseMultiplier: 0.8,     // Slightly reduced for smoother feel
-      smoothTouch: false,       // Disable on touch for better mobile performance
-      touchMultiplier: 2,       // Touch scroll speed
-      infinite: false,          // No infinite scroll
-      syncTouch: false,         // Better touch handling
-      syncTouchLerp: 0.1,       // Smooth touch interpolation
-      touchInertiaMultiplier: 35, // Smooth touch inertia
-    })
+    // Dynamically import Lenis to avoid SSR issues
+    const loadLenis = async () => {
+      try {
+        const Lenis = (await import('lenis')).default
+        
+        // Create a Lenis instance with ultra-smooth settings
+        const lenisInstance = new Lenis({
+          duration: 1.8,            // Increased for more smoothness
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing curve
+          direction: 'vertical',    // Vertical scrolling only
+          smooth: true,             // Enable smooth scrolling
+          mouseMultiplier: 0.8,     // Slightly reduced for smoother feel
+          smoothTouch: false,       // Disable on touch for better mobile performance
+          touchMultiplier: 2,       // Touch scroll speed
+          infinite: false,          // No infinite scroll
+          syncTouch: false,         // Better touch handling
+          syncTouchLerp: 0.1,       // Smooth touch interpolation
+          touchInertiaMultiplier: 35, // Smooth touch inertia
+        })
 
-    setLenis(lenisInstance)
+        setLenis(lenisInstance)
 
-    // Animation loop using requestAnimationFrame with better performance
-    let animationId: number
-    function raf(time: number) {
-      lenisInstance.raf(time)
-      animationId = requestAnimationFrame(raf)
+        // Animation loop using requestAnimationFrame with better performance
+        let animationId: number
+        function raf(time: number) {
+          lenisInstance.raf(time)
+          animationId = requestAnimationFrame(raf)
+        }
+        animationId = requestAnimationFrame(raf)
+
+        // Return cleanup function
+        return () => {
+          lenisInstance.destroy()
+          if (animationId) {
+            cancelAnimationFrame(animationId)
+          }
+          setLenis(null)
+        }
+      } catch (error) {
+        console.error('Failed to load Lenis:', error)
+        return () => {}
+      }
     }
-    animationId = requestAnimationFrame(raf)
+
+    let cleanup: (() => void) | undefined
+
+    // Only load Lenis on the client side
+    if (typeof window !== 'undefined') {
+      loadLenis().then((cleanupFn) => {
+        cleanup = cleanupFn
+      })
+    }
 
     // Cleanup function
     return () => {
-      lenisInstance.destroy()
-      if (animationId) {
-        cancelAnimationFrame(animationId)
+      if (cleanup) {
+        cleanup()
       }
-      setLenis(null)
     }
   }, [])
 
