@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
 
@@ -41,6 +42,20 @@ export default function RootLayout({
         <meta name="msapplication-TileImage" content="/mountain.svg?v=3" />
       </head>
       <body className="antialiased">
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-E7BSZ0EXBV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E7BSZ0EXBV');
+          `}
+        </Script>
+        
         <LenisProvider>
           {children}
         </LenisProvider>
