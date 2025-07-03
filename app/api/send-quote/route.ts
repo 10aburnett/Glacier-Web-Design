@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
       console.log('From:', mailOptions.from)
       console.log('To:', mailOptions.to)
       console.log('Subject:', mailOptions.subject)
-      console.log('📎 Attachments:', attachments.length, 'files -', attachments.map(a => a.filename).join(', '))
+      console.log('📎 Attachments:', attachments.length, 'files -', attachments.map((a: any) => a.filename).join(', '))
       
       await transporter.sendMail(mailOptions)
       console.log('✅ Email sent successfully to Infoglacierdesign@gmail.com')
