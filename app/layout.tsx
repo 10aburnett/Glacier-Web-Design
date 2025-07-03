@@ -52,7 +52,18 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-E7BSZ0EXBV');
+            gtag('config', 'G-E7BSZ0EXBV', {
+              page_location: window.location.href.replace(window.location.hostname, 'glacierwebdesign.com'),
+              page_title: document.title,
+              custom_map: {
+                'custom_parameter_1': 'original_domain'
+              }
+            });
+            
+            // Track the original domain as a custom dimension for reference
+            gtag('event', 'page_view', {
+              'custom_parameter_1': window.location.hostname
+            });
           `}
         </Script>
         
