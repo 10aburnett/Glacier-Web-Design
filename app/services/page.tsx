@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { useLenis, useScrollToTop } from '@/components/LenisProvider'
+import { useScrollToTop } from '@/components/LenisProvider'
 import { 
   Layout, 
   Smartphone, 
@@ -131,17 +131,16 @@ const additionalServices = [
 
 export default function ServicesPage() {
   const [highlightedService, setHighlightedService] = useState<string | null>(null)
-  const lenis = useLenis()
   const { navigateAndScrollToTop } = useScrollToTop()
 
   useEffect(() => {
     // Check if there's a hash in the URL
     const hash = window.location.hash.substring(1)
-    if (hash && lenis) {
-      // Find the service element and scroll to it using Lenis
+    if (hash) {
+      // Find the service element and scroll to it using native scroll
       const serviceElement = document.getElementById(hash)
       if (serviceElement) {
-        // Delay to ensure the page has rendered and Lenis is ready
+        // Delay to ensure the page has rendered
         setTimeout(() => {
           // Get the element's bounding rectangle for accurate positioning
           const elementRect = serviceElement.getBoundingClientRect()
@@ -157,10 +156,10 @@ export default function ServicesPage() {
           // Calculate final scroll position
           const targetScrollPosition = elementTop - navbarHeight - buffer
           
-          // Use Lenis scrollTo method for smooth scrolling
-          lenis.scrollTo(targetScrollPosition, {
-            duration: 1.5,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          // Use native smooth scroll
+          window.scrollTo({
+            top: targetScrollPosition,
+            behavior: 'smooth'
           })
           
           // Highlight the service
@@ -170,7 +169,7 @@ export default function ServicesPage() {
         }, 300)
       }
     }
-  }, [lenis])
+  }, [])
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-ice-950 via-glacier-950 to-ice-950">

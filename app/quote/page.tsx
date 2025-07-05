@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useLenis } from '@/components/LenisProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
@@ -23,7 +22,6 @@ import {
   MapPin,
   X
 } from 'lucide-react'
-import ParallaxBackground from '@/components/ParallaxBackground'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -64,7 +62,6 @@ export default function QuotePage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [fileUploadError, setFileUploadError] = useState<string | null>(null)
-  const lenis = useLenis()
 
 
 
@@ -93,15 +90,9 @@ export default function QuotePage() {
 
   const totalSteps = 6
 
-  // WORK WITH LENIS - use its own methods instead of fighting it
+  // Use native scroll to top
   const forceScrollToTop = () => {
-    if (lenis) {
-      // Use Lenis's immediate scroll to avoid conflicts
-      lenis.scrollTo(0, { immediate: true })
-    } else {
-      // Fallback for when Lenis isn't loaded yet
-      window.scrollTo(0, 0)
-    }
+    window.scrollTo(0, 0)
   }
 
   const nextStep = () => {
@@ -736,72 +727,8 @@ export default function QuotePage() {
 
   return (
     <>
-
-
-      {/* Mobile Background - positioned higher */}
-      <div className="sm:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
-        <div 
-          className="iceberg-background w-full h-[600vh] bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/assets/IcebergBG5.svg?v=3)',
-            backgroundSize: '160% 600vh',
-            backgroundPosition: 'center -1600px',
-          }}
-        />
-      </div>
-
-      {/* Tablet Portrait Background - optimized for all iPad models in portrait */}
-      <div className="hidden sm:block xl:hidden fixed inset-0 w-full h-full overflow-hidden z-0">
-        <div 
-          className="iceberg-background w-full h-[600vh] bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/assets/IcebergBG5.svg?v=3)',
-            backgroundSize: '180% 600vh',
-            backgroundPosition: 'center -800px',
-          }}
-        />
-      </div>
-
-      {/* Surface Pro 7 Portrait Background Override */}
-      <style jsx>{`
-        @media (width: 912px) and (height: 1368px) and (orientation: portrait) {
-          .iceberg-background {
-            background-position: center -1050px !important;
-          }
-        }
-      `}</style>
-
-      {/* Asus Zenbook Fold Portrait - specific override for better SVG positioning */}
-      <style jsx>{`
-        @media (min-width: 840px) and (max-width: 860px) and (orientation: portrait) {
-          .iceberg-background {
-            background-position: center -1200px !important;
-          }
-        }
-        
-        /* iPad Mini and iPad Air Landscape - pull SVG down for better positioning */
-        @media (min-width: 1000px) and (max-width: 1200px) and (orientation: landscape) {
-          .iceberg-background {
-            background-position: center -100px !important;
-          }
-        }
-      `}</style>
-
-      {/* Desktop Background - original positioning */}
-      <div className="hidden xl:block fixed inset-0 w-full h-full overflow-hidden z-0">
-        <div 
-          className="iceberg-background w-full h-[600vh] bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/assets/IcebergBG5.svg?v=3)',
-            backgroundSize: '160% 600vh',
-          }}
-        />
-      </div>
-
-      <ParallaxBackground />
-
-      {/* Main Content - positioned above background */}
-      <main className="relative z-10 min-h-screen" data-page="quote">
+      {/* Main Content */}
+      <main className="min-h-screen" data-page="quote">
         <Navbar />
         
         <div className="pt-20">

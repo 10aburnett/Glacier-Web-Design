@@ -5,12 +5,30 @@ import { motion } from 'framer-motion'
 import { ChevronDown, Mountain } from 'lucide-react'
 
 export default function HeroSection() {
-  const [currentLetterIndex, setCurrentLetterIndex] = useState(-1)
-  const [isTypingComplete, setIsTypingComplete] = useState(false)
-  const [cursorState, setCursorState] = useState('typing') // 'typing', 'blinking', 'hidden'
+  // Check navigation state immediately during component initialization
+  const isFromNavigation = typeof window !== 'undefined' && (
+    sessionStorage.getItem('cameFromPillButton') === 'true' || 
+    sessionStorage.getItem('isInternalNavigation') === 'true'
+  )
+  
+  const [currentLetterIndex, setCurrentLetterIndex] = useState(isFromNavigation ? 10 : -1) // 10 = fullText.length - 1
+  const [isTypingComplete, setIsTypingComplete] = useState(isFromNavigation)
+  const [cursorState, setCursorState] = useState(isFromNavigation ? 'hidden' : 'typing')
+  const [shouldAnimate, setShouldAnimate] = useState(!isFromNavigation)
   const fullText = 'Reimagined.'
   
   useEffect(() => {
+    // Clear navigation flags
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('isInternalNavigation')
+      sessionStorage.removeItem('cameFromPillButton')
+    }
+    
+    // Only start typing animation if not from navigation
+    if (!shouldAnimate) {
+      return
+    }
+    
     // Highly variable typing delays for natural human feel
     const typingDelays = [
       65,   // R - very quick confident start
@@ -58,7 +76,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent" />
 
       {/* Main content */}
-      <div className="section-padding relative z-10 -mt-64 landscape:max-md:mt-8">
+      <div className="section-padding relative z-10 -mt-[480px] landscape:max-md:mt-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

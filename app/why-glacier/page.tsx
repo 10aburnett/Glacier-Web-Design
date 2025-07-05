@@ -115,8 +115,8 @@ export default function WhyGlacierPage() {
 
         <div className="section-padding relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
@@ -125,14 +125,6 @@ export default function WhyGlacierPage() {
               <br />
               <span className="text-gradient">Glacier?</span>
             </h1>
-            <p className="text-mobile-body-large text-glacier-200 leading-relaxed mb-6 md:mb-8">
-              We're not a big agency with a dozen departments and overpriced packages. 
-              We're two designers and developers — Will and Alex — who combine cutting-edge 
-              tech skills with clean, powerful design.
-            </p>
-            <p className="text-mobile-body text-glacier-300">
-              We've built Glacier for one reason: to help businesses like yours look great online without the stress.
-            </p>
           </motion.div>
         </div>
       </section>
@@ -140,27 +132,13 @@ export default function WhyGlacierPage() {
       {/* Our Approach */}
       <section className="py-16">
         <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-mobile-section-heading font-bold text-white mb-4">Our Approach</h2>
-            <p className="text-xl text-glacier-200">Why people choose us over traditional agencies</p>
-          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {advantages.map((advantage, index) => {
               const Icon = advantage.icon
               return (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
                   className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-6 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 group hover:bg-white/10"
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${advantage.gradient} p-0.5 mb-6`}>
@@ -170,7 +148,7 @@ export default function WhyGlacierPage() {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">{advantage.title}</h3>
                   <p className="text-glacier-200 leading-relaxed">{advantage.description}</p>
-                </motion.div>
+                </div>
               )
             })}
           </div>
@@ -180,27 +158,17 @@ export default function WhyGlacierPage() {
       {/* Meet Will & Alex */}
       <section className="py-16">
         <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Meet Will & Alex</h2>
             <p className="text-xl text-glacier-200">The two-person team behind every Glacier project</p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {processPoints.map((point, index) => {
               const Icon = point.icon
               return (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
                   className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-6 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 group text-center hover:bg-white/10"
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${point.gradient} p-0.5 mb-6 mx-auto`}>
@@ -210,7 +178,7 @@ export default function WhyGlacierPage() {
                   </div>
                   <h3 className="text-xl font-bold text-white mb-4">{point.title}</h3>
                   <p className="text-glacier-200 leading-relaxed">{point.description}</p>
-                </motion.div>
+                </div>
               )
             })}
           </div>
@@ -220,26 +188,14 @@ export default function WhyGlacierPage() {
       {/* Pricing & Timeline */}
       <section className="py-16">
         <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Flexible & Fair</h2>
             <p className="text-xl text-glacier-200">Pricing and timelines that work for your business</p>
-          </motion.div>
+          </div>
 
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Pricing Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 hover:bg-white/10"
-            >
+            <div className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 hover:bg-white/10">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-glacier-500 to-glacier-600 p-0.5">
                   <div className="w-full h-full rounded-xl bg-ice-950 flex items-center justify-center">
@@ -266,16 +222,10 @@ export default function WhyGlacierPage() {
                   <span>No hidden fees or markups</span>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Timeline Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 hover:bg-white/10"
-            >
+            <div className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 hover:bg-white/10">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-fintech-accent to-glacier-400 p-0.5">
                   <div className="w-full h-full rounded-xl bg-ice-950 flex items-center justify-center">
@@ -302,7 +252,7 @@ export default function WhyGlacierPage() {
                   <span>Extended timelines for budget flexibility</span>
                 </li>
               </ul>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -310,25 +260,15 @@ export default function WhyGlacierPage() {
       {/* Our Workflow */}
       <section className="py-16">
         <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Personal Touch, Every Step</h2>
             <p className="text-xl text-glacier-200">What working with us actually looks like</p>
-          </motion.div>
+          </div>
 
           <div className="max-w-4xl mx-auto">
             {workflowSteps.map((step, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-6 shadow-2xl shadow-black/20 hover:shadow-black/30 mb-4 last:mb-0 transition-all duration-300 hover:bg-white/10"
               >
                 <div className="flex items-start gap-6">
@@ -340,7 +280,7 @@ export default function WhyGlacierPage() {
                     <p className="text-glacier-200 leading-relaxed">{step.description}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -349,11 +289,7 @@ export default function WhyGlacierPage() {
       {/* Final Value Prop */}
       <section className="py-16">
         <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+          <div
             className="backdrop-blur-2xl bg-white/5 border border-white/20 hover:border-white/30 rounded-2xl p-8 md:p-12 shadow-2xl shadow-black/20 hover:shadow-black/30 transition-all duration-300 max-w-4xl mx-auto text-center hover:bg-white/10"
           >
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-glacier-500 to-fintech-primary p-0.5 mb-6 mx-auto">
@@ -380,11 +316,11 @@ export default function WhyGlacierPage() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       <Footer />
     </main>
   )
-} 
+}

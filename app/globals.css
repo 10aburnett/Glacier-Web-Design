@@ -10,13 +10,13 @@ html, body {
 
 @layer base {
   html {
-    scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
+    scroll-behavior: smooth; /* Native smooth scrolling */
   }
 
   body {
     @apply text-ice-800 font-inter;
     min-height: 100vh;
-    background: #070024;
+    background-color: #0c2650;
   }
 
   /* Performance optimizations for smooth scrolling */
@@ -24,65 +24,38 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  /* Optimize rendering for better performance */
-  .section-padding {
-    contain: layout style; /* CSS containment for better performance */
-  }
 }
 
 @layer components {
-  /* Iceberg Parallax Background with GPU-optimized states */
-  .iceberg-background {
-    background-image: url('/assets/IcebergBG5.svg?v=3'), linear-gradient(135deg, 
-      #0c4a6e 0%,    /* Deep blue for underwater */
-      #0ea5e9 25%,   /* Ocean blue */
-      #38bdf8 50%,   /* Sky blue */
-      #7dd3fc 75%,   /* Light blue */
-      #bae6fd 100%   /* Aurora tint */
-    );
-    background-attachment: fixed;
-    background-size: 160% 600vh, cover;
+  /* CSS 3D Parallax Container */
+  .homepage-bg {
+    position: relative;
+    height: 100vh;
+    overflow-x: hidden;
+    perspective: 1px;
+  }
+
+  /* Parallax Background Layer */
+  .homepage-bg::before {
+    content: '';
+    background-image: url('/assets/IcebergBGreal.svg');
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center -150px;
-    transform: translateZ(0); /* Force hardware acceleration */
-    will-change: transform, filter, background-position;
-    transition: filter 0.3s ease-out, background-position 0.3s ease-out;
+    background-position: center 280px;
+    height: 320vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    transform: translateZ(-1px) scale(2);
   }
 
-  /* Parallax Background States - GPU optimized with CSS transitions */
-  .iceberg-background.state-top {
-    filter: brightness(1.1) contrast(0.95) saturate(1.1);
-    background-position: center -150px;
-  }
-
-  .iceberg-background.state-upper {
-    filter: brightness(1.05) contrast(1) saturate(1.05);
-    background-position: center calc(20% - 150px);
-  }
-
-  .iceberg-background.state-waterline {
-    filter: brightness(1) contrast(1.05) saturate(1);
-    background-position: center calc(40% - 150px);
-  }
-
-  .iceberg-background.state-upper-deep {
-    filter: brightness(0.95) contrast(1.1) saturate(0.95) hue-rotate(5deg);
-    background-position: center calc(60% - 150px);
-  }
-
-  .iceberg-background.state-deep {
-    filter: brightness(0.85) contrast(1.15) saturate(0.9) hue-rotate(10deg);
-    background-position: center calc(80% - 150px);
-  }
-
-  /* Mobile optimization for parallax */
-  @media (max-width: 768px) {
-    .iceberg-background {
-      background-attachment: scroll; /* Better performance on mobile */
-      background-size: cover;
-      min-height: 200vh;
-    }
+  /* Content Layer */
+  .homepage-content {
+    position: relative;
+    z-index: 1;
+    transform: translateZ(0);
   }
 
   /* Mobile landscape hero text positioning fixes for specific devices */
@@ -193,108 +166,6 @@ html, body {
     }
   }
 
-  /* Specific device optimizations for portrait orientation only */
-  /* iPad Air Portrait */
-  @media (min-width: 810px) and (max-width: 830px) and (orientation: portrait) {
-    .iceberg-background.state-top {
-      background-position: center -1250px !important;
-    }
-    .iceberg-background.state-upper {
-      background-position: center calc(20% - 1250px) !important;
-    }
-    .iceberg-background.state-waterline {
-      background-position: center calc(40% - 1250px) !important;
-    }
-    .iceberg-background.state-upper-deep {
-      background-position: center calc(60% - 1250px) !important;
-    }
-    .iceberg-background.state-deep {
-      background-position: center calc(80% - 1250px) !important;
-    }
-  }
-
-  /* iPad Pro 11" Portrait */
-  @media (min-width: 830px) and (max-width: 840px) and (orientation: portrait) {
-    .iceberg-background.state-top {
-      background-position: center -1250px !important;
-    }
-    .iceberg-background.state-upper {
-      background-position: center calc(20% - 1250px) !important;
-    }
-    .iceberg-background.state-waterline {
-      background-position: center calc(40% - 1250px) !important;
-    }
-    .iceberg-background.state-upper-deep {
-      background-position: center calc(60% - 1250px) !important;
-    }
-    .iceberg-background.state-deep {
-      background-position: center calc(80% - 1250px) !important;
-    }
-  }
-
-  /* Asus Zenbook Fold Portrait */
-  @media (min-width: 845px) and (max-width: 865px) and (orientation: portrait) {
-    .iceberg-background.state-top {
-      background-position: center -1350px !important;
-    }
-    .iceberg-background.state-upper {
-      background-position: center calc(20% - 1350px) !important;
-    }
-    .iceberg-background.state-waterline {
-      background-position: center calc(40% - 1350px) !important;
-    }
-    .iceberg-background.state-upper-deep {
-      background-position: center calc(60% - 1350px) !important;
-    }
-    .iceberg-background.state-deep {
-      background-position: center calc(80% - 1350px) !important;
-    }
-  }
-
-  /* Surface Pro 7 Portrait */
-  @media (min-width: 900px) and (max-width: 920px) and (orientation: portrait) {
-    .iceberg-background.state-top {
-      background-position: center -1400px !important;
-    }
-    .iceberg-background.state-upper {
-      background-position: center calc(20% - 1400px) !important;
-    }
-    .iceberg-background.state-waterline {
-      background-position: center calc(40% - 1400px) !important;
-    }
-    .iceberg-background.state-upper-deep {
-      background-position: center calc(60% - 1400px) !important;
-    }
-    .iceberg-background.state-deep {
-      background-position: center calc(80% - 1400px) !important;
-    }
-  }
-
-  /* Surface Pro 7 Portrait - Quote Page Only (move up 50px) */
-  @media (width: 912px) and (height: 1368px) and (orientation: portrait) {
-    [data-page="quote"] .hidden.sm\\:block.xl\\:hidden .iceberg-background {
-      background-position: center -850px !important;
-    }
-  }
-
-  /* iPad Pro 12.9" Portrait */
-  @media (min-width: 1020px) and (max-width: 1030px) and (orientation: portrait) {
-    .iceberg-background.state-top {
-      background-position: center -1250px !important;
-    }
-    .iceberg-background.state-upper {
-      background-position: center calc(20% - 1250px) !important;
-    }
-    .iceberg-background.state-waterline {
-      background-position: center calc(40% - 1250px) !important;
-    }
-    .iceberg-background.state-upper-deep {
-      background-position: center calc(60% - 1250px) !important;
-    }
-    .iceberg-background.state-deep {
-      background-position: center calc(80% - 1250px) !important;
-    }
-  }
 
   /* Enhanced Glassmorphism Effects for Content Over Background */
   .glass {

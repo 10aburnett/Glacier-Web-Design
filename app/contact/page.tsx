@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CustomDropdown from '@/components/CustomDropdown'
 import { Mail, Phone, MapPin, Send, Calendar } from 'lucide-react'
 
 export default function ContactPage() {
@@ -25,6 +26,13 @@ export default function ContactPage() {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handleDropdownChange = (name: string, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value
     })
   }
 
@@ -74,26 +82,6 @@ export default function ContactPage() {
     }
   }
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      value: 'Infoglacierdesign@gmail.com',
-      action: 'mailto:Infoglacierdesign@gmail.com'
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      value: 'Access granted to clients',
-      action: 'tel:+15551234567'
-    },
-    {
-      icon: Calendar,
-      title: 'Schedule a Meeting',
-      value: 'Book a free consultation',
-      action: '#'
-    }
-  ]
 
 
 
@@ -137,14 +125,13 @@ export default function ContactPage() {
       {/* Contact Form & Info */}
       <section className="py-12">
         <div className="section-padding">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="lg:col-span-8"
             >
               <div className="glass-dark rounded-2xl p-6 backdrop-blur-xl border border-white/10 h-full">
                 <h2 className="text-2xl font-bold text-white mb-4">Send Us a Message</h2>
@@ -230,44 +217,36 @@ export default function ContactPage() {
                     </div>
 
                     {/* Project Type */}
-                    <div className="relative">
-                      <select
-                        name="projectType"
-                        id="projectType"
-                        value={formData.projectType}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 
-                                 rounded-xl focus:outline-none focus:border-fintech-accent transition-colors
-                                 text-white"
-                        required
-                      >
-                        <option value="" className="bg-ice-950">Select Project Type</option>
-                        <option value="redesign" className="bg-ice-950">Website Redesign</option>
-                        <option value="new-site" className="bg-ice-950">New Website</option>
-                        <option value="optimization" className="bg-ice-950">Performance Optimization</option>
-                        <option value="consultation" className="bg-ice-950">Consultation</option>
-                      </select>
-                    </div>
+                    <CustomDropdown
+                      name="projectType"
+                      id="projectType"
+                      value={formData.projectType}
+                      onChange={handleDropdownChange}
+                      placeholder="Select Project Type"
+                      required
+                      options={[
+                        { value: 'redesign', label: 'Website Redesign' },
+                        { value: 'new-site', label: 'New Website' },
+                        { value: 'optimization', label: 'Performance Optimization' },
+                        { value: 'consultation', label: 'Consultation' }
+                      ]}
+                    />
                   </div>
 
                   {/* Budget Range */}
-                  <div className="relative">
-                    <select
-                      name="budget"
-                      id="budget"
-                      value={formData.budget}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 
-                               rounded-xl focus:outline-none focus:border-fintech-accent transition-colors
-                               text-white"
-                    >
-                      <option value="" className="bg-ice-950">Select Budget Range</option>
-                      <option value="0-1k" className="bg-ice-950">£0 - £1,000</option>
-                      <option value="1k-3k" className="bg-ice-950">£1,000 - £3,000</option>
-                      <option value="3k-10k" className="bg-ice-950">£3,000 - £10,000</option>
-                      <option value="10k+" className="bg-ice-950">£10,000+</option>
-                    </select>
-                  </div>
+                  <CustomDropdown
+                    name="budget"
+                    id="budget"
+                    value={formData.budget}
+                    onChange={handleDropdownChange}
+                    placeholder="Select Budget Range"
+                    options={[
+                      { value: '0-1k', label: '£0 - £1,000' },
+                      { value: '1k-3k', label: '£1,000 - £3,000' },
+                      { value: '3k-10k', label: '£3,000 - £10,000' },
+                      { value: '10k+', label: '£10,000+' }
+                    ]}
+                  />
 
                   {/* Message */}
                   <div className="relative">
@@ -375,61 +354,6 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="lg:col-span-4"
-            >
-              {/* Contact Information */}
-              <div className="glass-dark rounded-2xl p-7 backdrop-blur-xl border border-white/10 h-full">
-                <h3 className="text-2xl font-bold text-white mb-9">Get in Touch</h3>
-                <div className="space-y-6">
-                  {contactInfo.map((info, index) => {
-                    const Icon = info.icon
-                    const isScheduleCall = info.title === 'Schedule a Meeting'
-                    const isPhone = info.title === 'Phone'
-                    const isLast = index === contactInfo.length - 1
-                    
-                    const itemContent = isScheduleCall || isPhone ? (
-                      <div className="flex items-center gap-5 p-4 rounded-xl bg-white/5">
-                        <div className="w-14 h-14 bg-fintech-accent/20 rounded-xl flex items-center justify-center">
-                          <Icon className="w-7 h-7 text-fintech-accent" />
-                        </div>
-                        <div>
-                          <h4 className="text-base font-semibold text-white mb-1">{info.title}</h4>
-                          <p className="text-sm text-glacier-300">{info.value}</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <a
-                        href={info.action}
-                        className="flex items-center gap-5 p-4 rounded-xl hover:bg-white/10 transition-all duration-300 group bg-white/5"
-                      >
-                        <div className="w-14 h-14 bg-fintech-accent/20 rounded-xl flex items-center justify-center group-hover:bg-fintech-accent/30 transition-colors">
-                          <Icon className="w-7 h-7 text-fintech-accent" />
-                        </div>
-                        <div>
-                          <h4 className="text-base font-semibold text-white mb-1 group-hover:text-fintech-accent transition-colors">{info.title}</h4>
-                          <p className="text-sm text-glacier-300">{info.value}</p>
-                        </div>
-                      </a>
-                    )
-                    
-                    return (
-                      <div key={index}>
-                        {itemContent}
-                        {!isLast && <div className="border-b border-white/10 mt-6"></div>}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-
-            </motion.div>
           </div>
         </div>
       </section>

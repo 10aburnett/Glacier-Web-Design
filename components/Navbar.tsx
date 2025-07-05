@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X, Mountain } from 'lucide-react'
 import Link from 'next/link'
-import { useLenis, useScrollToTop } from './LenisProvider'
+import { usePathname } from 'next/navigation'
+import { useScrollToTop } from './LenisProvider'
 
 const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
-  { name: 'Why Glacier?', href: '/why-glacier' },
+  { name: 'Why Glacier', href: '/why-glacier' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' }
 ]
@@ -18,15 +19,12 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const lenis = useLenis()
+  const pathname = usePathname()
   const { navigateAndScrollToTop } = useScrollToTop()
   
   useEffect(() => {
-    if (!lenis) return
-
-    const handleScroll = (lenisData: any) => {
-      // Access scroll position from the event callback
-      const currentScrollY = lenisData.scroll || 0
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
       
       // Always show navbar at the top of the page
       if (currentScrollY < 50) {
@@ -43,9 +41,9 @@ export default function Navbar() {
       setLastScrollY(currentScrollY)
     }
 
-    lenis.on('scroll', handleScroll)
-    return () => lenis.off('scroll', handleScroll)
-  }, [lenis, lastScrollY])
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   return (
     <motion.nav
@@ -68,17 +66,29 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-              {navItems.map((item, index) => (
-                <button
-                  key={item.name}
-                  onClick={() => navigateAndScrollToTop(item.href)}
-                                      className={`text-white hover:text-white/80 transition-colors font-medium text-sm uppercase tracking-wide ${
-                     index === 0 ? 'md:ml-6 lg:ml-0' : ''
-                   }`}
-                >
-                  {item.name}
-                </button>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = pathname === item.href
+                const isHome = item.href === '/'
+                const shouldHide = isHome && pathname === '/'
+                
+                if (shouldHide) return null
+                
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => navigateAndScrollToTop(item.href)}
+                    className={`${
+                      isActive 
+                        ? 'text-glacier-500' 
+                        : 'text-white hover:text-white/80'
+                    } transition-colors font-medium text-sm uppercase tracking-wide ${
+                      index === 0 ? 'md:ml-6 lg:ml-0' : ''
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                )
+              })}
               <button 
                 onClick={() => navigateAndScrollToTop('/quote')} 
                 className="btn-primary text-sm px-5 py-2"
@@ -111,18 +121,30 @@ export default function Navbar() {
             className="md:hidden overflow-hidden"
           >
             <nav className="flex flex-col gap-4 py-6 mt-4 border-t border-white/20">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false)
-                    navigateAndScrollToTop(item.href)
-                  }}
-                  className="text-white hover:text-white/80 transition-colors font-medium px-2 text-left"
-                >
-                  {item.name}
-                </button>
-              ))}
+              {navItems.map((item) => {
+                const isActive = pathname === item.href
+                const isHome = item.href === '/'
+                const shouldHide = isHome && pathname === '/'
+                
+                if (shouldHide) return null
+                
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      navigateAndScrollToTop(item.href)
+                    }}
+                    className={`${
+                      isActive 
+                        ? 'text-glacier-500' 
+                        : 'text-white hover:text-white/80'
+                    } transition-colors font-medium px-2 text-left`}
+                  >
+                    {item.name}
+                  </button>
+                )
+              })}
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false)

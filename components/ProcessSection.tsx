@@ -72,22 +72,25 @@ export default function ProcessSection() {
   return (
     <section ref={containerRef} className="py-32 relative">
       <div className="section-padding relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6">
-            <span className="text-white drop-shadow-lg">Our Proven</span>
-            <br />
-            <span className="text-gradient drop-shadow-lg">4-Phase Process</span>
-          </h2>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            From concept to completion with precision and excellence
-          </p>
-        </motion.div>
+        {/* Process Header Card */}
+        <div className="glass-dark rounded-2xl p-2 md:p-4 backdrop-blur-xl border-2 border-white/10 max-w-xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6">
+              <span className="text-white drop-shadow-lg">Our Proven</span>
+              <br />
+              <span className="text-gradient drop-shadow-lg">4-Phase Process</span>
+            </h2>
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              From concept to completion with precision and excellence
+            </p>
+          </motion.div>
+        </div>
 
         {/* Mobile: Simple Vertical Stack, Desktop: Elegant Timeline */}
         <div className="max-w-4xl mx-auto">

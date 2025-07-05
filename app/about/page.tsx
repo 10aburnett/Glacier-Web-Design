@@ -12,11 +12,6 @@ import { TrendingUp, Shield, Mountain, Sparkles } from 'lucide-react'
 
 const values = [
   {
-    title: 'Excellence',
-    description: 'We pursue perfection in every pixel, every line of code, and every client interaction.',
-    icon: Sparkles
-  },
-  {
     title: 'Innovation',
     description: 'Staying ahead of digital trends to deliver cutting-edge solutions that give you a competitive edge.',
     icon: Mountain
@@ -64,8 +59,8 @@ export default function AboutPage() {
               <span className="text-white"> Glacier</span>
             </h1>
             <p className="text-mobile-body-large text-glacier-200 leading-relaxed">
-              We're not just another web agency. We're digital architects crafting 
-              high-performance experiences that transform businesses.
+              Most web agencies talk in jargon and charge premium prices. We speak plain English, 
+              deliver on time, and price fairly. Your success is our reputation.
             </p>
           </motion.div>
         </div>
@@ -83,23 +78,22 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-mobile-section-heading font-bold mb-4 md:mb-6 text-white">
-                Our Story
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white">
+                Why We Started Glacier
               </h2>
               <p className="text-lg text-glacier-200 mb-6 leading-relaxed">
-                Founded on the belief that exceptional web design should be accessible to all businesses, 
-                Glacier Web Design emerged from a simple observation: too many companies were stuck with 
-                outdated, underperforming websites that held them back.
+                A great website is more than just a digital business card — it's often your first and most powerful impression.
+                Glacier Web Design emerged from a simple observation: lots of companies are stuck with 
+                outdated, underperforming websites that hold them back. We think that exceptional web design should be accessible to all businesses.
               </p>
               <p className="text-lg text-glacier-200 mb-6 leading-relaxed">
                 We set out to change that by combining cutting-edge design principles with 
-                fintech-grade performance standards. Our approach creates digital experiences that don't 
+                high performance standards. Our approach creates digital experiences that don't 
                 just look beautiful—they deliver measurable results and authentic brand representation.
               </p>
               <p className="text-lg text-glacier-200 leading-relaxed">
-                Our vision extends beyond individual projects: we're building a future where thoughtful 
-                design and strategic thinking help businesses connect with their audiences in more 
-                meaningful ways, fostering genuine growth and lasting success.
+                
+                
               </p>
             </motion.div>
 

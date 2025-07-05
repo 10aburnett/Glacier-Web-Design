@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { useLenis } from './LenisProvider'
 import ServicePill from './ServicePill'
 import { 
   Layout, 
@@ -83,7 +82,6 @@ const servicesMobile = [
 
 export default function ServicesMenu() {
   const router = useRouter()
-  const lenis = useLenis()
   const [isMobile, setIsMobile] = useState(false)
 
   // Check if screen is mobile size
@@ -100,7 +98,7 @@ export default function ServicesMenu() {
 
   const handlePillClick = (serviceId: string) => {
     // Store current scroll position before navigating
-    const currentScrollY = lenis ? lenis.scroll : window.scrollY
+    const currentScrollY = window.scrollY
     sessionStorage.setItem('pillButtonScrollPosition', currentScrollY.toString())
     sessionStorage.setItem('cameFromPillButton', 'true')
     
