@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-8 relative overflow-hidden">
         <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
       </section>
 
       {/* Content Section */}
-      <section className="py-20">
+      <section className="pt-8 pb-20">
         <div className="section-padding">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -44,14 +44,20 @@ export default function PrivacyPage() {
             <div className="glass-dark rounded-2xl p-8 md:p-12 backdrop-blur-xl border border-white/10">
               <div className="prose prose-invert max-w-none">
                 <p className="text-glacier-200 mb-6 text-sm">
-                  <strong>Last updated:</strong> {new Date().toLocaleDateString()}
+                  <strong>Last updated:</strong> {(() => {
+                    const d = new Date();
+                    const day = d.getDate().toString().padStart(2, '0');
+                    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                    const year = d.getFullYear();
+                    return `${day}/${month}/${year}`;
+                  })()}
                 </p>
 
                 <div className="space-y-8">
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-4">Information We Collect</h2>
                     <p className="text-glacier-200 mb-4">
-                      We collect information you provide directly to us, such as when you create an account, 
+                      We collect information you provide directly to us, such as when you 
                       request a quote, contact us, or use our services. This may include:
                     </p>
                     <ul className="list-disc list-inside text-glacier-200 space-y-2 ml-4">
@@ -86,7 +92,6 @@ export default function PrivacyPage() {
                       <li>With your consent or at your direction</li>
                       <li>To comply with legal obligations</li>
                       <li>To protect and defend our rights and property</li>
-                      <li>With service providers who assist in our operations</li>
                     </ul>
                   </div>
 
@@ -94,16 +99,11 @@ export default function PrivacyPage() {
                     <h2 className="text-2xl font-bold text-white mb-4">Data Security</h2>
                     <p className="text-glacier-200 mb-4">
                       We implement appropriate security measures to protect your personal information against 
-                      unauthorized access, alteration, disclosure, or destruction. These measures include:
+                      unauthorised access, alteration, disclosure, or destruction.
                     </p>
-                    <ul className="list-disc list-inside text-glacier-200 space-y-2 ml-4">
-                      <li>Encryption of sensitive data</li>
-                      <li>Regular security assessments</li>
-                      <li>Restricted access to personal information</li>
-                      <li>Secure data storage and transmission</li>
-                    </ul>
                   </div>
 
+                  {/*
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-4">Cookies and Tracking</h2>
                     <p className="text-glacier-200 mb-4">
@@ -112,6 +112,7 @@ export default function PrivacyPage() {
                       or to indicate when a cookie is being sent.
                     </p>
                   </div>
+                  */}
 
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-4">Your Rights</h2>
@@ -142,7 +143,6 @@ export default function PrivacyPage() {
                     </p>
                     <div className="mt-4 text-glacier-200">
                       <p><strong>Email:</strong> <a href="mailto:Infoglacierdesign@gmail.com" className="text-glacier-400 hover:text-glacier-300 transition-colors">Infoglacierdesign@gmail.com</a></p>
-                      <p><strong>Phone:</strong> Access granted to clients</p>
                     </div>
                   </div>
                 </div>
