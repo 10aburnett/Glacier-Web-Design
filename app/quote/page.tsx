@@ -674,7 +674,6 @@ export default function QuotePage() {
                 <div className="text-4xl font-bold text-white mb-2">
                   £{calculateEstimate().toLocaleString()}
                 </div>
-                <p className="text-glacier-400">Estimated project cost</p>
               </div>
 
               <div className="border-t border-white/20 pt-4">
@@ -702,7 +701,6 @@ export default function QuotePage() {
 
             <div className="bg-glacier-500/20 border border-glacier-400/30 rounded-xl p-4">
               <p className="text-white/90 text-sm text-center">
-                This is an estimated quote. Final pricing will be determined after consultation. 
                 We'll contact you within 24 hours to discuss your project in detail.
               </p>
             </div>
@@ -793,25 +791,7 @@ export default function QuotePage() {
             </div>
           )}
 
-          {/* Live Running Total - Fixed Position - only show if not submitted */}
-          {!isSubmitted && (
-            <motion.div
-              key={calculateEstimate()} // Re-animate when estimate changes
-              initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 0.3 }}
-              className="fixed bottom-[-64px] sm:bottom-[-64px] md:bottom-[-64px] xl:bottom-12 right-6 z-50"
-            >
-              <div className="glass-dark rounded-2xl p-4 backdrop-blur-xl border border-glacier-400/30 shadow-lg">
-                <div className="text-center">
-                  <p className="text-glacier-400 text-sm font-medium mb-1">Estimate</p>
-                  <div className="text-2xl font-bold text-white">
-                    £{calculateEstimate().toLocaleString()}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
+
 
           {/* Form Content */}
           <div className="max-w-4xl mx-auto">
@@ -913,6 +893,28 @@ export default function QuotePage() {
               </div>
             )}
           </div>
+
+          {/* Live Running Total - Positioned between form and footer - only show if not submitted */}
+          {!isSubmitted && (
+            <div className="max-w-4xl mx-auto mt-8">
+              <motion.div
+                key={calculateEstimate()} // Re-animate when estimate changes
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 0.3 }}
+                className="flex justify-center"
+              >
+                <div className="glass-dark rounded-2xl p-6 backdrop-blur-xl border border-glacier-400/30 shadow-lg">
+                  <div className="text-center">
+                    <p className="text-glacier-400 text-sm font-medium mb-1">Estimated Project Cost</p>
+                    <div className="text-3xl font-bold text-white">
+                      £{calculateEstimate().toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
         </div>
         </div>
         
