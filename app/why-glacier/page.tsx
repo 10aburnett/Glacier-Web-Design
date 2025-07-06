@@ -241,7 +241,7 @@ export default function WhyGlacierPage() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-glacier-200">
                   <CheckCircle className="w-5 h-5 text-fintech-accent flex-shrink-0" />
-                  <span>Rush projects in 1-2 weeks</span>
+                  <span>Priority projects in 1-2 weeks</span>
                 </li>
                 <li className="flex items-center gap-3 text-glacier-200">
                   <CheckCircle className="w-5 h-5 text-fintech-accent flex-shrink-0" />

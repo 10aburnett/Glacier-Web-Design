@@ -16,7 +16,8 @@ import {
   Shield,
   Code,
   BarChart,
-  Headphones
+  Headphones,
+  Plus
 } from 'lucide-react'
 
 const services = [
@@ -24,7 +25,7 @@ const services = [
     id: 1,
     serviceId: 'website-redesign',
     title: 'Web Design & Redesign',
-    description: 'Transform your digital presence with cutting-edge design that converts visitors into customers.',
+    description: 'Convert visitors into customers with cutting-edge design.',
     icon: Layout,
     features: [
       'Modern, responsive design',
@@ -106,32 +107,23 @@ const services = [
   }
 ]
 
-const additionalServices = [
-  {
-    title: 'Brand Strategy',
-    icon: Palette,
-    description: 'Develop a cohesive digital brand identity'
-  },
-  {
-    title: 'Security Audits',
-    icon: Shield,
-    description: 'Comprehensive security assessments and fixes'
-  },
-  {
-    title: 'Speed Optimization',
-    icon: Zap,
-    description: 'Lightning-fast load times across all devices'
-  },
-  {
-    title: '24/7 Support',
-    icon: Headphones,
-    description: 'Round-the-clock technical support and maintenance'
-  }
-]
 
 export default function ServicesPage() {
   const [highlightedService, setHighlightedService] = useState<string | null>(null)
+  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({})
+  const [hasInteracted, setHasInteracted] = useState(false)
   const { navigateAndScrollToTop } = useScrollToTop()
+
+  const toggleCard = (serviceId: string) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [serviceId]: !prev[serviceId]
+    }))
+    // Hide the expand hint after first interaction
+    if (!hasInteracted) {
+      setHasInteracted(true)
+    }
+  }
 
   useEffect(() => {
     // Check if there's a hash in the URL
@@ -228,11 +220,30 @@ export default function ServicesPage() {
                   whileHover={{ y: -5 }}
                   className="group"
                 >
-                  <div className={`glass-dark rounded-2xl p-8 h-full backdrop-blur-xl transition-all duration-300 ${
+                  <div className={`glass-dark rounded-2xl p-8 backdrop-blur-xl transition-all duration-300 relative ${
                     highlightedService === service.serviceId 
                       ? 'border-2 border-fintech-accent shadow-lg shadow-fintech-accent/20 bg-fintech-accent/5' 
                       : 'border border-white/10 hover:border-white/20 hover:bg-white/5'
                   }`}>
+                    {/* Toggle Button - Bottom Center */}
+                    <button
+                      onClick={() => toggleCard(service.serviceId)}
+                      className="absolute bottom-5 left-1/2 transform -translate-x-1/2 w-8 h-8 flex items-center justify-center hover:bg-fintech-accent/10 rounded-full transition-all duration-300 text-fintech-accent hover:text-fintech-accent/80"
+                    >
+                      <Plus 
+                        className={`w-5 h-5 transition-transform duration-300 ${
+                          expandedCards[service.serviceId] ? 'rotate-45' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {/* Show EXPAND hint only on first card, when collapsed, and before first interaction */}
+                    {service.id === 1 && !expandedCards[service.serviceId] && !hasInteracted && (
+                      <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium tracking-wide opacity-75 animate-pulse pointer-events-none text-fintech-accent z-10">
+                        CLICK TO EXPAND
+                      </span>
+                    )}
+
                     {/* Icon */}
                     <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} p-0.5 mb-6`}>
                       <div className="w-full h-full rounded-2xl bg-ice-950 flex items-center justify-center group-hover:bg-ice-900 transition-colors">
@@ -248,15 +259,25 @@ export default function ServicesPage() {
                       {service.description}
                     </p>
 
-                    {/* Features */}
-                    <ul className="space-y-3">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 bg-fintech-accent rounded-full mt-2 flex-shrink-0" />
-                          <span className="text-glacier-200 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Features - Collapsible */}
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: expandedCards[service.serviceId] ? 'auto' : 0,
+                        opacity: expandedCards[service.serviceId] ? 1 : 0
+                      }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="space-y-3 pb-8">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 bg-fintech-accent rounded-full mt-2 flex-shrink-0" />
+                            <span className="text-glacier-200 text-sm">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
 
 
                   </div>
@@ -267,52 +288,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Additional Services */}
-      <section className="py-20">
-        <div className="section-padding">
-          <motion.div
-            initial={{ y: 15 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Additional Services
-            </h2>
-            <p className="text-xl text-glacier-200">
-              Comprehensive support for every aspect of your digital journey
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {additionalServices.map((service, index) => {
-              const Icon = service.icon
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ y: 15 }}
-                  whileInView={{ y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                  className="glass-dark rounded-xl p-6 text-center group backdrop-blur-xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all"
-                >
-                  <Icon 
-                    className="w-12 h-12 text-fintech-accent mx-auto mb-4 group-hover:scale-110 transition-transform" 
-                    key={`additional-service-${index}`}
-                    style={{ 
-                      transform: 'scale(1)',
-                      willChange: 'transform'
-                    }}
-                  />
-                  <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
-                  <p className="text-sm text-glacier-200">{service.description}</p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20">

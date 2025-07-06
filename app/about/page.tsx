@@ -40,13 +40,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-gradient-to-b from-ice-950 via-glacier-950 to-ice-950">
       <Navbar />
       
-      {/* Hero Section */}
       <section className="pt-32 pb-16 md:pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-fintech-accent rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-fintech-primary rounded-full blur-3xl" />
-        </div>
-
         <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
