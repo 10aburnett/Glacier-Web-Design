@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+d@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,7 +16,7 @@ html, body {
   body {
     @apply text-ice-800 font-inter;
     min-height: 100vh;
-    background-color: #0c2650;
+    background-color: #13243F;
   }
 
   /* Performance optimizations for smooth scrolling */
