@@ -71,23 +71,23 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Content overlay for better readability over iceberg background */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent" />
 
       {/* Main content */}
-      <div className="section-padding relative z-10 -mt-[480px] landscape:max-md:mt-8">
+      <div className="section-padding relative z-10 pt-[105px] sm:pt-[95px] md:pt-[115px] lg:pt-[120px] xl:pt-[130px] flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-5xl mx-auto text-center"
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6 leading-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-[0.25em] flex flex-col gap-[0.08em]"
           >
             <div className="text-left -ml-4 md:-ml-8 lg:-ml-12">
             <span className="text-gradient">Web Design</span>
