@@ -17,14 +17,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/mountain.svg?v=3', type: 'image/svg+xml' },
-      { url: '/mountain.svg?v=3', sizes: '32x32', type: 'image/svg+xml' },
-      { url: '/mountain.svg?v=3', sizes: '16x16', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/mountain.svg', type: 'image/svg+xml' },
     ],
     apple: [
-      { url: '/mountain.svg?v=3', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/mountain.svg?v=3',
+    shortcut: '/favicon.ico',
   },
 }
 
@@ -36,10 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
-        <link rel="icon" href="/mountain.svg?v=3" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/mountain.svg?v=3" />
-        <link rel="shortcut icon" href="/mountain.svg?v=3" />
-        <meta name="msapplication-TileImage" content="/mountain.svg?v=3" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="msapplication-TileImage" content="/favicon-32x32.png" />
       </head>
       <body className="antialiased">
         {/* Google Analytics */}
