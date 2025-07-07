@@ -10,7 +10,7 @@ export default function TermsPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-32 pb-6 relative overflow-hidden">
         <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -23,16 +23,12 @@ export default function TermsPage() {
               <br />
               <span className="text-gradient">Service</span>
             </h1>
-            <p className="text-xl md:text-2xl text-glacier-200 leading-relaxed">
-              Please read these terms carefully before using our services. 
-              By using our services, you agree to be bound by these terms.
-            </p>
           </motion.div>
         </div>
       </section>
 
       {/* Content Section */}
-      <section className="py-20">
+      <section className="pt-8 pb-20">
         <div className="section-padding">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -44,7 +40,13 @@ export default function TermsPage() {
             <div className="glass-dark rounded-2xl p-8 md:p-12 backdrop-blur-xl border border-white/10">
               <div className="prose prose-invert max-w-none">
                 <p className="text-glacier-200 mb-6 text-sm">
-                  <strong>Last updated:</strong> January 2025
+                  <strong>Last updated:</strong> {(() => {
+                    const d = new Date();
+                    const day = d.getDate().toString().padStart(2, '0');
+                    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                    const year = d.getFullYear();
+                    return `${day}/${month}/${year}`;
+                  })()}
                 </p>
 
                 <div className="space-y-8">
@@ -198,7 +200,6 @@ export default function TermsPage() {
                     </p>
                     <div className="mt-4 text-glacier-200">
                       <p><strong>Email:</strong> <a href="mailto:Infoglacierdesign@gmail.com" className="text-glacier-400 hover:text-glacier-300 transition-colors">Infoglacierdesign@gmail.com</a></p>
-                      <p><strong>Phone:</strong> Access granted to clients</p>
                     </div>
                   </div>
                 </div>

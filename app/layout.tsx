@@ -43,6 +43,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {/* Google Analytics */}
+        {/*
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-E7BSZ0EXBV"
           strategy="afterInteractive"
@@ -59,14 +60,13 @@ export default function RootLayout({
                 'custom_parameter_1': 'original_domain'
               }
             });
-            
             // Track the original domain as a custom dimension for reference
             gtag('event', 'page_view', {
               'custom_parameter_1': window.location.hostname
             });
           `}
         </Script>
-        
+        */}
         <LenisProvider>
           {children}
         </LenisProvider>
