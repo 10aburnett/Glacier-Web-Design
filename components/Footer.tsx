@@ -8,7 +8,7 @@ const footerLinks = {
   company: [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
-    { name: 'Why Glacier?', href: '/why-glacier' },
+    { name: 'Why Glacier', href: '/why-glacier' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ],
